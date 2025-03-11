@@ -3,13 +3,23 @@ import React, { useState, useEffect } from 'react'
 import { Uncial_Antiqua, Nanum_Gothic } from "next/font/google";
 import { motion } from "framer-motion";
 
-
 const uncialAntiqua = Uncial_Antiqua({ subsets: ["latin"], weight: ["400"] });
 const nanumGothic = Nanum_Gothic({ subsets: ["latin"], weight: ["400"] });
 
+// Array of images to cycle through
+const images = [
+  "/assets/img1.jpg",
+  "/assets/img2.jpg",
+  "/assets/img3.jpg",
+  "/assets/img4.jpg",
+  "/assets/img5.jpg", // Ensure this image exists or replace it with one you have
+];
+
 const ThrowbackSection = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [globalIndex, setGlobalIndex] = useState(0);
 
+  // Visibility check for the section
   useEffect(() => {
     const handleScroll = () => {
       const section = document.getElementById("throwback-section");
@@ -23,6 +33,14 @@ const ThrowbackSection = () => {
     window.addEventListener("scroll", handleScroll);
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Update global image index every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setGlobalIndex(prevIndex => (prevIndex + 1) % images.length);
+    }, 3000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -129,80 +147,105 @@ const ThrowbackSection = () => {
           </p>
         </motion.div>
 
-        {/* Compact Collage Layout - unchanged */}
+        {/* Compact Collage Layout with dynamic image rotation */}
         <div className="py-4 px-2 mx-auto max-w-screen-xl sm:py-4 lg:px-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 h-full">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 h-full">
           
-          <div className="col-span-2 sm:col-span-1 md:col-span-2  h-auto md:h-full flex flex-col">
-            <a href="" className="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40 flex-grow">
-              <img 
-                 src="/assets/img1.jpg" 
-                alt="" 
-                className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
-              <h3 className="z-10 text-2xl font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-3xl">
-                Wines
-              </h3>
-            </a>
-          </div>
-
-          <div className="col-span-2 sm:col-span-1 md:col-span-2 ">
-            <a href="" className="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40 mb-4">
-              <img 
-                src="/assets/img2.jpg"  
-                alt="" 
-                className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
-              <h3 className="z-10 text-2xl font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-3xl">
-                Gin
-              </h3>
-            </a>
-            
-            <div className="grid gap-4 grid-cols-2 sm:grid-cols-2 lg:grid-cols-2">
-              <a href="" className="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40">
-                <img 
-                  src="/assets/img3.jpg"  
-                  alt="" 
+            {/* Container 1 */}
+            <div className="col-span-2 sm:col-span-1 md:col-span-2 h-auto md:h-full flex flex-col">
+              <a href="" className="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40 flex-grow">
+                <motion.img 
+                  key={`img0-${globalIndex}`}
+                  src={images[(globalIndex + 0) % images.length]}
+                  alt=""
                   className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1 }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
                 <h3 className="z-10 text-2xl font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-3xl">
-                  Whiskey
-                </h3>
-              </a>
-
-              <a href="" className="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40">
-                <img 
-                   src="/assets/img4.jpg"  
-                  alt="" 
-                  className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
-                <h3 className="z-10 text-2xl font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-3xl">
-                  Vodka
+                  Wines
                 </h3>
               </a>
             </div>
-          </div>
 
-          <div className="col-span-2 sm:col-span-1 md:col-span-1 h-auto md:h-full flex flex-col">
-            <a href="" className="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40 flex-grow">
-              <img 
-                src="/assets/img1.jpg" 
-                alt="" 
-                className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
-              <h3 className="z-10 text-2xl font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-3xl">
-                Brandy
-              </h3>
-            </a>
-          </div>
+            {/* Container 2 */}
+            <div className="col-span-2 sm:col-span-1 md:col-span-2 ">
+              <a href="" className="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40 mb-4">
+                <motion.img 
+                  key={`img1-${globalIndex}`}
+                  src={images[(globalIndex + 1) % images.length]}
+                  alt=""
+                  className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1 }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
+                <h3 className="z-10 text-2xl font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-3xl">
+                  Gin
+                </h3>
+              </a>
+              
+              <div className="grid gap-4 grid-cols-2 sm:grid-cols-2 lg:grid-cols-2">
+                {/* Nested Container 1 */}
+                <a href="" className="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40">
+                  <motion.img 
+                    key={`img2-${globalIndex}`}
+                    src={images[(globalIndex + 2) % images.length]}
+                    alt=""
+                    className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1 }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
+                  <h3 className="z-10 text-2xl font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-3xl">
+                    Whiskey
+                  </h3>
+                </a>
 
+                {/* Nested Container 2 */}
+                <a href="" className="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40">
+                  <motion.img 
+                    key={`img3-${globalIndex}`}
+                    src={images[(globalIndex + 3) % images.length]}
+                    alt=""
+                    className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1 }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
+                  <h3 className="z-10 text-2xl font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-3xl">
+                    Vodka
+                  </h3>
+                </a>
+              </div>
+            </div>
+
+            {/* Container 3 */}
+            <div className="col-span-2 sm:col-span-1 md:col-span-1 h-auto md:h-full flex flex-col">
+              <a href="" className="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40 flex-grow">
+                <motion.img 
+                  key={`img4-${globalIndex}`}
+                  src={images[(globalIndex + 4) % images.length]}
+                  alt=""
+                  className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1 }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
+                <h3 className="z-10 text-2xl font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-3xl">
+                  Brandy
+                </h3>
+              </a>
+            </div>
+
+          </div>
         </div>
-      </div>
       </div>
     </section>
   );
