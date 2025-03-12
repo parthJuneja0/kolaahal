@@ -1,11 +1,11 @@
-'use client'
-import React, { useState } from 'react';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import firebaseApp from '../../../firebase.config';
+"use client";
+import React, { useState } from "react";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import firebaseApp from "../../../firebase.config";
 
 const Signup = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
@@ -17,10 +17,16 @@ const Signup = () => {
     setSuccess(null);
 
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+
+      const response = await axios.post("/api/signup", {
+        auth,
+        email,
+        password,
+      });
+
       setSuccess("Account created successfully!");
-      setEmail('');
-      setPassword('');
+      setEmail("");
+      setPassword("");
     } catch (err) {
       setError(err.message);
     }
@@ -29,10 +35,12 @@ const Signup = () => {
   return (
     <div className="bg-background min-h-screen flex items-center justify-center">
       <div className="bg-white p-8 rounded-xl shadow-md w-96">
-        <h2 className="text-primary text-2xl font-bold mb-4 text-center">Signup</h2>
+        <h2 className="text-primary text-2xl font-bold mb-4 text-center">
+          Signup
+        </h2>
         {error && <p className="text-red-500 text-sm">{error}</p>}
         {success && <p className="text-green-500 text-sm">{success}</p>}
-        
+
         <form onSubmit={handleSignup} className="space-y-4">
           <input
             type="email"

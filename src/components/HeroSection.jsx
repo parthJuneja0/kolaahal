@@ -3,6 +3,7 @@ import React from "react";
 import { Uncial_Antiqua, Nanum_Gothic } from "next/font/google";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const uncialAntiqua = Uncial_Antiqua({ subsets: ["latin"], weight: ["400"] });
 
@@ -25,17 +26,17 @@ const HeroSection = () => {
       };
 
       createParticles();
-      
+
       // Recreate particles when window resizes
       const handleResize = () => {
         createParticles();
       };
-      
-      window.addEventListener('resize', handleResize);
-      
+
+      window.addEventListener("resize", handleResize);
+
       // Cleanup
       return () => {
-        window.removeEventListener('resize', handleResize);
+        window.removeEventListener("resize", handleResize);
       };
     }
   }, []); // Runs only on client
@@ -93,20 +94,22 @@ const HeroSection = () => {
             </motion.div>
 
             {/* Animated button */}
-            <motion.button
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{
-                delay: 1.1,
-                duration: 0.5,
-                type: "spring",
-              }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="mt-8 md:mt-12 px-6 sm:px-8 py-2 sm:py-3 bg-gradient-to-r from-red-600 to-pink-600 rounded-full text-base sm:text-lg font-medium hover:shadow-glow transition-all duration-300"
-            >
-              Explore Activities
-            </motion.button>
+            <Link href={"/events"}>
+              <motion.button
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{
+                  delay: 1.1,
+                  duration: 0.5,
+                  type: "spring",
+                }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="mt-8 md:mt-12 px-6 sm:px-8 py-2 sm:py-3 bg-gradient-to-r from-red-600 to-pink-600 rounded-full text-base sm:text-lg font-medium hover:shadow-glow transition-all duration-300"
+              >
+                Explore Activities
+              </motion.button>
+            </Link>
           </div>
 
           {/* Animated particles - adjust for mobile */}
@@ -121,7 +124,13 @@ const HeroSection = () => {
                   scale: particle.scale,
                 }}
                 animate={{
-                  y: [particle.y, Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 500)],
+                  y: [
+                    particle.y,
+                    Math.random() *
+                      (typeof window !== "undefined"
+                        ? window.innerHeight
+                        : 500),
+                  ],
                   opacity: [particle.opacity, 0.1 + Math.random() * 0.5],
                 }}
                 transition={{

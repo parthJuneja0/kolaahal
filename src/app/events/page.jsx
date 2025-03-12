@@ -1,13 +1,17 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Uncial_Antiqua, Nanum_Gothic } from "next/font/google";
 import Head from "next/head";
 import Link from "next/link";
+import Image from "next/image";
+import { eventsDataContext } from "@/context/eventsDataContext";
 
 const uncialAntiqua = Uncial_Antiqua({ subsets: ["latin"], weight: ["400"] });
 const nanumGothic = Nanum_Gothic({ subsets: ["latin"], weight: ["400"] });
 
 export default function Events() {
+  const { activities } = useContext(eventsDataContext);
+
   const [activeTab, setActiveTab] = useState("technical");
   const [animateCards, setAnimateCards] = useState(false);
 
@@ -29,113 +33,6 @@ export default function Events() {
     { id: "creativity", name: "Creativity" },
     { id: "management", name: "Management" },
   ];
-
-  const activities = {
-    technical: [
-      {
-        id: 1,
-        title: "Hackathon",
-        description: "A 24-hour coding competition",
-        image: "/assets/img1.jpg",
-      },
-      {
-        id: 2,
-        title: "CTF Challenge",
-        description: "Capture the flag cybersecurity contest",
-        image: "/assets/img2.jpg",
-      },
-      {
-        id: 3,
-        title: "Tech Quiz",
-        description: "Test your knowledge of latest technologies",
-        image: "/assets/img3.jpg",
-      },
-      {
-        id: 4,
-        title: "Code Debugging",
-        description: "Find and fix bugs in record time",
-        image: "/assets/img4.jpg",
-      },
-    ],
-    cultural: [
-      {
-        id: 5,
-        title: "Battle of Bands",
-        description: "Show off your musical talent",
-        image: "/api/placeholder/400/250",
-      },
-      {
-        id: 6,
-        title: "Dance Competition",
-        description: "Showcase your dance moves",
-        image: "/api/placeholder/400/250",
-      },
-      {
-        id: 7,
-        title: "Fashion Show",
-        description: "Walk the ramp with style",
-        image: "/api/placeholder/400/250",
-      },
-      {
-        id: 8,
-        title: "Art Exhibition",
-        description: "Display your artistic creations",
-        image: "/api/placeholder/400/250",
-      },
-    ],
-    creativity: [
-      {
-        id: 9,
-        title: "Cricket Tournament",
-        description: "Compete in the gentleman's game",
-        image: "/api/placeholder/400/250",
-      },
-      {
-        id: 10,
-        title: "Chess Championship",
-        description: "Strategic mind games at their best",
-        image: "/api/placeholder/400/250",
-      },
-      {
-        id: 11,
-        title: "Basketball",
-        description: "Show your skills on the court",
-        image: "/api/placeholder/400/250",
-      },
-      {
-        id: 12,
-        title: "Swimming Gala",
-        description: "Make a splash and win medals",
-        image: "/api/placeholder/400/250",
-      },
-    ],
-    management: [
-      {
-        id: 13,
-        title: "AI management",
-        description: "Learn about artificial intelligence",
-        image: "/api/placeholder/400/250",
-      },
-      {
-        id: 14,
-        title: "Robotics Session",
-        description: "Build your own robot",
-        image: "/api/placeholder/400/250",
-      },
-      {
-        id: 15,
-        title: "Design Thinking",
-        description: "Creative problem-solving techniques",
-        image: "/api/placeholder/400/250",
-      },
-      {
-        id: 16,
-        title: "Cloud Computing",
-        description: "Get started with cloud infrastructure",
-        image: "/api/placeholder/400/250",
-      },
-    ],
-  };
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -203,22 +100,22 @@ export default function Events() {
         </div>
       </div>
 
-      <main className="container mx-auto px-4 py-10 relative">
+      <main className="container mx-auto px-4 lg:px-32 py-10 relative">
         {/* Decorative element */}
         <div className="absolute top-0 right-0 w-32 h-32 md:w-48 md:h-48 bg-red-600 rounded-full opacity-10 blur-3xl -z-10"></div>
         <div className="absolute bottom-0 left-0 w-40 h-40 md:w-64 md:h-64 bg-red-800 rounded-full opacity-10 blur-3xl -z-10"></div>
 
         {/* Category Tabs */}
         <div className="mb-12 w-full max-w-5xl mx-auto px-4">
-      <div className="relative bg-gradient-to-br from-gray-900/20 to-gray-950 p-3 md:p-6 rounded-xl overflow-hidden">
-        {/* Glass panel for buttons */}
-        <div className="relative backdrop-blur-sm bg-gray-900/30 rounded-lg p-2 md:p-4 border border-gray-800/50">
-          <div className="flex flex-wrap justify-center">
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => setActiveTab(category.id)}
-                className={`
+          <div className="relative bg-gradient-to-br from-gray-900/20 to-gray-950 p-3 md:p-6 rounded-xl overflow-hidden">
+            {/* Glass panel for buttons */}
+            <div className="relative backdrop-blur-sm bg-gray-900/30 rounded-lg p-2 md:p-4 border border-gray-800/50">
+              <div className="flex flex-wrap justify-center">
+                {categories.map((category) => (
+                  <button
+                    key={category.id}
+                    onClick={() => setActiveTab(category.id)}
+                    className={`
                   group relative m-1 px-3 py-2 md:px-8 md:py-3 overflow-hidden
                   text-sm md:text-base
                   ${
@@ -227,41 +124,41 @@ export default function Events() {
                       : "text-gray-400 hover:text-white"
                   }
                 `}
-              >
-                {/* Hexagonal background for active state */}
-                {activeTab === category.id && (
-                  <div className="absolute inset-0 bg-red-800/80 clip-hexagon"></div>
-                )}
-                
-                {/* Hover effect - subtle glow */}
-                <div className="absolute inset-0 bg-red-700/0 clip-hexagon transition-all duration-300 group-hover:bg-red-700/20"></div>
-                
-                {/* Text content */}
-                <span className="relative z-10 font-medium tracking-wide whitespace-nowrap">
-                  {category.name}
-                </span>
-                
-                {/* Bottom accent line */}
-                <div
-                  className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 h-0.5 bg-red-600 transition-all duration-300 ${
-                    activeTab === category.id
-                      ? "w-full"
-                      : "w-0 group-hover:w-2/3"
-                  }`}
-                ></div>
-              </button>
-            ))}
+                  >
+                    {/* Hexagonal background for active state */}
+                    {activeTab === category.id && (
+                      <div className="absolute inset-0 bg-red-800/80 clip-hexagon"></div>
+                    )}
+
+                    {/* Hover effect - subtle glow */}
+                    <div className="absolute inset-0 bg-red-700/0 clip-hexagon transition-all duration-300 group-hover:bg-red-700/20"></div>
+
+                    {/* Text content */}
+                    <span className="relative z-10 font-medium tracking-wide whitespace-nowrap">
+                      {category.name}
+                    </span>
+
+                    {/* Bottom accent line */}
+                    <div
+                      className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 h-0.5 bg-red-600 transition-all duration-300 ${
+                        activeTab === category.id
+                          ? "w-full"
+                          : "w-0 group-hover:w-2/3"
+                      }`}
+                    ></div>
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      </div>
 
         {/* Activity Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-20">
           {activities[activeTab].map((activity, index) => (
             <Link
-              key={activity.id}
-              href={`/events/${activeTab}/${activity.id}`}
+              key={activity.title}
+              href={`/events/${activeTab}/${activity.title}`}
               passHref
             >
               <div
@@ -272,11 +169,13 @@ export default function Events() {
                 } transition-all duration-500`}
                 style={{ transitionDelay: `${index * 75}ms` }}
               >
-                <div className="relative h-56 overflow-hidden">
-                  <img
+                <div className="relative overflow-hidden">
+                  <Image
+                    width={400}
+                    height={400}
                     src={activity.image}
                     alt={activity.title}
-                    className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700 ease-out"
+                    className="object-contain w-full h-full group-hover:scale-110 transition-transform duration-700 ease-out"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
 
@@ -288,7 +187,9 @@ export default function Events() {
                   <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-red-500 transition-colors duration-300">
                     {activity.title}
                   </h3>
-                  <p className="text-gray-400">{activity.description}</p>
+                  <p className="text-gray-400">
+                    {activity.description.substring(0, 100) + "..."}
+                  </p>
 
                   <div className="mt-6 flex justify-between items-center">
                     <span className="text-xs text-red-400 uppercase tracking-wider font-medium">
@@ -328,18 +229,30 @@ export default function Events() {
 
       {/* Add custom styles */}
       <style jsx global>{`
-
-      .clip-hexagon {
-          clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+        .clip-hexagon {
+          clip-path: polygon(
+            10% 0%,
+            90% 0%,
+            100% 50%,
+            90% 100%,
+            10% 100%,
+            0% 50%
+          );
         }
-        
+
         @media (max-width: 640px) {
           .clip-hexagon {
-            clip-path: polygon(5% 0%, 95% 0%, 100% 50%, 95% 100%, 5% 100%, 0% 50%);
+            clip-path: polygon(
+              5% 0%,
+              95% 0%,
+              100% 50%,
+              95% 100%,
+              5% 100%,
+              0% 50%
+            );
           }
         }
-     
-      
+
         @keyframes gradient {
           0% {
             background-position: 0% 50%;
