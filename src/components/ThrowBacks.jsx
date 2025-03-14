@@ -1,46 +1,66 @@
-"use client";
-import React, { useState, useEffect } from "react";
+'use client'
+import React, { useState, useEffect } from 'react'
 import { Uncial_Antiqua, Nanum_Gothic } from "next/font/google";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const uncialAntiqua = Uncial_Antiqua({ subsets: ["latin"], weight: ["400"] });
 const nanumGothic = Nanum_Gothic({ subsets: ["latin"], weight: ["400"] });
 
-// Array of images to cycle through
+
 const images = [
   "/assets/img1.jpg",
   "/assets/img2.jpg",
   "/assets/img3.jpg",
   "/assets/img4.jpg",
-  "/assets/img5.jpg", // Ensure this image exists or replace it with one you have
+  "/assets/img5.jpg"
 ];
+
+// Custom hook to update a container's image index with a staggered delay
+function useStaggeredImage(globalCycle, offset, delayMs) {
+  const [localIndex, setLocalIndex] = useState((globalCycle + offset) % images.length);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLocalIndex((globalCycle + offset) % images.length);
+    }, delayMs);
+    return () => clearTimeout(timer);
+  }, [globalCycle, offset, delayMs]);
+
+  return localIndex;
+}
 
 const ThrowbackSection = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [globalIndex, setGlobalIndex] = useState(0);
+  const [globalCycle, setGlobalCycle] = useState(0);
+
+  // Global cycle updates every 5 seconds.
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setGlobalCycle(prev => prev + 1);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Each container gets its local image index with a staggered delay.
+  const winesIndex = useStaggeredImage(globalCycle, 0, 0);
+  const ginIndex = useStaggeredImage(globalCycle, 1, 400);
+  const whiskeyIndex = useStaggeredImage(globalCycle, 2, 800);
+  const vodkaIndex = useStaggeredImage(globalCycle, 3, 1200);
+  const brandyIndex = useStaggeredImage(globalCycle, 4, 1600);
 
   // Visibility check for the section
   useEffect(() => {
     const handleScroll = () => {
       const section = document.getElementById("throwback-section");
       if (!section) return;
-      
       const sectionPosition = section.getBoundingClientRect();
-      const isVisible = sectionPosition.top < window.innerHeight * 0.75;
-      setIsVisible(isVisible);
+      const visible = sectionPosition.top < window.innerHeight * 0.75;
+      setIsVisible(visible);
     };
 
     window.addEventListener("scroll", handleScroll);
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Update global image index every 3 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setGlobalIndex(prevIndex => (prevIndex + 1) % images.length);
-    }, 3000);
-    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -54,14 +74,14 @@ const ThrowbackSection = () => {
               key={i}
               className="absolute h-full"
               style={{
-                width: "2px",
+                width: '2px',
                 background: `rgba(255, 0, 0, ${0.1 + i * 0.05})`,
                 left: `${15 + i * 20}%`,
-                transform: "skewX(-45deg) translateX(-50%)",
+                transform: 'skewX(-45deg) translateX(-50%)',
               }}
               animate={{
                 opacity: [0.2, 0.7, 0.2],
-                height: ["100%", "120%", "100%"],
+                height: ['100%', '120%', '100%'],
               }}
               transition={{
                 duration: 8,
@@ -82,8 +102,8 @@ const ThrowbackSection = () => {
               style={{
                 width: `${200 + i * 100}px`,
                 height: `${200 + i * 100}px`,
-                left: "15%",
-                top: "50%",
+                left: '15%',
+                top: '50%',
               }}
               animate={{
                 scale: [1, 1.2, 1],
@@ -101,8 +121,14 @@ const ThrowbackSection = () => {
           {/* Modern mesh gradient effect */}
           <motion.div
             className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-bl from-red-900/10 via-transparent to-transparent"
-            animate={{ opacity: [0.1, 0.3, 0.1] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            animate={{
+              opacity: [0.1, 0.3, 0.1],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
           />
         </div>
         
@@ -110,9 +136,8 @@ const ThrowbackSection = () => {
         <div 
           className="absolute inset-0" 
           style={{
-            backgroundImage:
-              "linear-gradient(to right, rgba(255, 0, 0, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 0, 0, 0.05) 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
+            backgroundImage: 'linear-gradient(to right, rgba(255, 0, 0, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 0, 0, 0.05) 1px, transparent 1px)',
+            backgroundSize: '40px 40px',
           }}
         />
       </div>
@@ -142,22 +167,25 @@ const ThrowbackSection = () => {
           </p>
         </motion.div>
 
-        {/* Compact Collage Layout with dynamic image rotation */}
+        {/* Compact Collage Layout with staggered, distinct image transitions */}
         <div className="py-4 px-2 mx-auto max-w-screen-xl sm:py-4 lg:px-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 h-full">
           
-            {/* Container 1 */}
+            {/* Wines Container */}
             <div className="col-span-2 sm:col-span-1 md:col-span-2 h-auto md:h-full flex flex-col">
               <a href="" className="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40 flex-grow">
-                <motion.img 
-                  key={`img0-${globalIndex}`}
-                  src={images[(globalIndex + 0) % images.length]}
-                  alt=""
-                  className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 1 }}
-                />
+                <AnimatePresence mode="wait">
+                  <motion.img 
+                    key={`wines-${winesIndex}`}
+                    src={images[winesIndex]}
+                    alt=""
+                    className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
+                    initial={{ opacity: 0, scale: 1.1 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 1.05 }}
+                    transition={{ duration: 1 }}
+                  />
+                </AnimatePresence>
                 <div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
                 <h3 className="z-10 text-2xl font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-3xl">
                   Wines
@@ -165,18 +193,21 @@ const ThrowbackSection = () => {
               </a>
             </div>
 
-            {/* Container 2 */}
-            <div className="col-span-2 sm:col-span-1 md:col-span-2">
+            {/* Gin Container */}
+            <div className="col-span-2 sm:col-span-1 md:col-span-2 ">
               <a href="" className="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40 mb-4">
-                <motion.img 
-                  key={`img1-${globalIndex}`}
-                  src={images[(globalIndex + 1) % images.length]}
-                  alt=""
-                  className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 1 }}
-                />
+                <AnimatePresence mode="wait">
+                  <motion.img 
+                    key={`gin-${ginIndex}`}
+                    src={images[ginIndex]}
+                    alt=""
+                    className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
+                    initial={{ opacity: 0, scale: 1.1 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 1.05 }}
+                    transition={{ duration: 1 }}
+                  />
+                </AnimatePresence>
                 <div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
                 <h3 className="z-10 text-2xl font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-3xl">
                   Gin
@@ -184,34 +215,40 @@ const ThrowbackSection = () => {
               </a>
               
               <div className="grid gap-4 grid-cols-2 sm:grid-cols-2 lg:grid-cols-2">
-                {/* Nested Container 1 */}
+                {/* Whiskey Container */}
                 <a href="" className="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40">
-                  <motion.img 
-                    key={`img2-${globalIndex}`}
-                    src={images[(globalIndex + 2) % images.length]}
-                    alt=""
-                    className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1 }}
-                  />
+                  <AnimatePresence mode="wait">
+                    <motion.img 
+                      key={`whiskey-${whiskeyIndex}`}
+                      src={images[whiskeyIndex]}
+                      alt=""
+                      className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
+                      initial={{ opacity: 0, scale: 1.1 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 1.05 }}
+                      transition={{ duration: 1 }}
+                    />
+                  </AnimatePresence>
                   <div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
                   <h3 className="z-10 text-2xl font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-3xl">
                     Whiskey
                   </h3>
                 </a>
 
-                {/* Nested Container 2 */}
+                {/* Vodka Container */}
                 <a href="" className="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40">
-                  <motion.img 
-                    key={`img3-${globalIndex}`}
-                    src={images[(globalIndex + 3) % images.length]}
-                    alt=""
-                    className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1 }}
-                  />
+                  <AnimatePresence mode="wait">
+                    <motion.img 
+                      key={`vodka-${vodkaIndex}`}
+                      src={images[vodkaIndex]}
+                      alt=""
+                      className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
+                      initial={{ opacity: 0, scale: 1.1 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 1.05 }}
+                      transition={{ duration: 1 }}
+                    />
+                  </AnimatePresence>
                   <div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
                   <h3 className="z-10 text-2xl font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-3xl">
                     Vodka
@@ -220,18 +257,21 @@ const ThrowbackSection = () => {
               </div>
             </div>
 
-            {/* Container 3 */}
+            {/* Brandy Container */}
             <div className="col-span-2 sm:col-span-1 md:col-span-1 h-auto md:h-full flex flex-col">
               <a href="" className="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40 flex-grow">
-                <motion.img 
-                  key={`img4-${globalIndex}`}
-                  src={images[(globalIndex + 4) % images.length]}
-                  alt=""
-                  className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 1 }}
-                />
+                <AnimatePresence mode="wait">
+                  <motion.img 
+                    key={`brandy-${brandyIndex}`}
+                    src={images[brandyIndex]}
+                    alt=""
+                    className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
+                    initial={{ opacity: 0, scale: 1.1 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 1.05 }}
+                    transition={{ duration: 1 }}
+                  />
+                </AnimatePresence>
                 <div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
                 <h3 className="z-10 text-2xl font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-3xl">
                   Brandy
