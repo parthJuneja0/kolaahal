@@ -2,28 +2,27 @@
 
 import { useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Nanum_Gothic } from "next/font/google";
-import HeroSection from '@/components/HeroSection';
-import { ThrowbackSection } from '@/components/ThrowBacks';
+import HeroSection from "@/components/HeroSection";
+import { ThrowbackSection } from "@/components/ThrowBacks";
 import Footer from "@/components/Footer";
-
-const nanumGothic = Nanum_Gothic({ subsets: ["latin"], weight: ["400"] });
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const [particles, setParticles] = useState([]);
+  // Force black theme regardless of browser settings
+  const isDarkMode = true;
   const { scrollY } = useScroll();
-  
-  // Transform values based on scroll position for parallax effects
+
+  // Use black theme values:
   const heroOpacity = useTransform(scrollY, [0, 400], [1, 0]);
   const heroY = useTransform(scrollY, [0, 400], [0, 100]);
-  
+
   useEffect(() => {
     // Lock body scroll when loading
     if (loading) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
     }
     
     // Simulate loading time
@@ -33,7 +32,7 @@ export default function Home() {
     
     return () => {
       clearTimeout(timer);
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
     };
   }, [loading]);
   
@@ -50,10 +49,8 @@ export default function Home() {
     }
   }, []); // Runs only on client
   
-  // Detect when each section is in view
+  // Detect when each section is in view (example for hero)
   const [heroInView, setHeroInView] = useState(false);
-  
-  // Observer for scroll animations
   useEffect(() => {
     if (!loading && typeof window !== "undefined" && typeof IntersectionObserver !== "undefined") {
       const observer = new IntersectionObserver(
@@ -108,7 +105,7 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className={`text-6xl font-bold text-white ${nanumGothic.className} z-10`}
+            className="text-6xl font-bold text-white z-10"
           >
             Presenting
           </motion.div>
@@ -131,17 +128,21 @@ export default function Home() {
         className="w-full h-full"
       >
         <main className="relative">
-          {/* Parallax Hero Section wrapper */}
+          {/* Parallax Hero Section wrapper forced to black theme */}
           <motion.div 
             id="hero-section" 
-            style={{ opacity: heroOpacity, y: heroY }}
+            style={{ 
+              opacity: heroOpacity, 
+              y: heroY,
+              backgroundColor: "#000"
+            }}
             className="relative"
           >
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               animate={{ 
-                opacity: loading ? 0 : 1, 
-                y: loading ? 50 : 0 
+                opacity: loading ? 0 : 1,
+                y: loading ? 50 : 0,
               }}
               transition={{ 
                 duration: 0.8, 
@@ -153,11 +154,12 @@ export default function Home() {
             </motion.div>
           </motion.div>
           
-          {/* Throwback section with reveal on scroll */}
+          {/* Throwback Section forced to black theme */}
           <motion.section
+            style={{ backgroundColor: "#000" }}
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
             viewport={{ once: false, amount: 0.3 }}
           >
             <ThrowbackSection />

@@ -1,5 +1,5 @@
-'use client'
-import React, { useState, useEffect } from 'react'
+"use client";
+import React, { useState, useEffect } from "react";
 import { Uncial_Antiqua, Nanum_Gothic } from "next/font/google";
 import { motion } from "framer-motion";
 
@@ -35,7 +35,7 @@ const ThrowbackSection = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Update global image index every 5 seconds
+  // Update global image index every 3 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setGlobalIndex(prevIndex => (prevIndex + 1) % images.length);
@@ -54,14 +54,14 @@ const ThrowbackSection = () => {
               key={i}
               className="absolute h-full"
               style={{
-                width: '2px',
+                width: "2px",
                 background: `rgba(255, 0, 0, ${0.1 + i * 0.05})`,
                 left: `${15 + i * 20}%`,
-                transform: 'skewX(-45deg) translateX(-50%)',
+                transform: "skewX(-45deg) translateX(-50%)",
               }}
               animate={{
                 opacity: [0.2, 0.7, 0.2],
-                height: ['100%', '120%', '100%'],
+                height: ["100%", "120%", "100%"],
               }}
               transition={{
                 duration: 8,
@@ -82,8 +82,8 @@ const ThrowbackSection = () => {
               style={{
                 width: `${200 + i * 100}px`,
                 height: `${200 + i * 100}px`,
-                left: '15%',
-                top: '50%',
+                left: "15%",
+                top: "50%",
               }}
               animate={{
                 scale: [1, 1.2, 1],
@@ -101,14 +101,8 @@ const ThrowbackSection = () => {
           {/* Modern mesh gradient effect */}
           <motion.div
             className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-bl from-red-900/10 via-transparent to-transparent"
-            animate={{
-              opacity: [0.1, 0.3, 0.1],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
+            animate={{ opacity: [0.1, 0.3, 0.1] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
           />
         </div>
         
@@ -116,8 +110,9 @@ const ThrowbackSection = () => {
         <div 
           className="absolute inset-0" 
           style={{
-            backgroundImage: 'linear-gradient(to right, rgba(255, 0, 0, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 0, 0, 0.05) 1px, transparent 1px)',
-            backgroundSize: '40px 40px',
+            backgroundImage:
+              "linear-gradient(to right, rgba(255, 0, 0, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 0, 0, 0.05) 1px, transparent 1px)",
+            backgroundSize: "40px 40px",
           }}
         />
       </div>
@@ -171,7 +166,7 @@ const ThrowbackSection = () => {
             </div>
 
             {/* Container 2 */}
-            <div className="col-span-2 sm:col-span-1 md:col-span-2 ">
+            <div className="col-span-2 sm:col-span-1 md:col-span-2">
               <a href="" className="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40 mb-4">
                 <motion.img 
                   key={`img1-${globalIndex}`}
