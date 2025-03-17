@@ -12,7 +12,6 @@ const HeroSection = () => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      // Create particles and handle window resize
       const createParticles = () => {
         setParticles(
           [...Array(20)].map(() => ({
@@ -26,7 +25,6 @@ const HeroSection = () => {
 
       createParticles();
 
-      // Recreate particles when window resizes
       const handleResize = () => {
         createParticles();
       };
@@ -40,6 +38,26 @@ const HeroSection = () => {
 
   return (
     <div className="relative w-full min-h-screen overflow-hidden bg-black">
+      {/* Top-left logos */}
+      <div className="absolute top-4 left-4 z-50 flex space-x-4">
+        <img src="/assets/miet.png" alt="Logo 1" className="h-10" />
+        <img src="/assets/image.png" alt="Logo 2" className="h-10" />
+      </div>
+
+      {/* Top-right buttons */}
+      <div className="absolute top-4 right-4 z-50 flex space-x-4">
+        <Link href="/signup">
+          <button className="px-6 py-2 bg-red-600 text-white rounded-full">
+            Sign Up
+          </button>
+        </Link>
+        <Link href="/registration">
+          <button className="px-6 py-2 bg-white/30 backdrop-blur text-white rounded-full">
+            Registration
+          </button>
+        </Link>
+      </div>
+
       {/* Main content */}
       <div className="relative w-full h-screen">
         {/* Video background */}
@@ -122,7 +140,10 @@ const HeroSection = () => {
               animate={{
                 y: [
                   particle.y,
-                  Math.random() * (typeof window !== "undefined" ? window.innerHeight : 500),
+                  Math.random() *
+                    (typeof window !== "undefined"
+                      ? window.innerHeight
+                      : 500),
                 ],
                 opacity: [particle.opacity, 0.1 + Math.random() * 0.5],
               }}
