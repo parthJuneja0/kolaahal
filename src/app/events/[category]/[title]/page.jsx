@@ -167,6 +167,17 @@ export default function EventDetail() {
                 </p>
               </div>
             </div>
+            <div className="flex items-start hover:translate-x-1 transition-transform duration-300">
+              <MapPin className="h-6 w-6 text-red-500 mr-4 flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="text-gray-400 text-sm font-medium">
+                  Registration Fees
+                </h3>
+                <p className="text-white text-lg font-medium">
+                  {activity.fees}
+                </p>
+              </div>
+            </div>
             <Link href={`/events/${category}/${title}/register`} passHref>
               <button
                 onClick={() => setIsModalOpen(true)}
