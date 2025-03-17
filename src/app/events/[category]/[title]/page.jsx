@@ -192,7 +192,7 @@ export default function EventDetail() {
             <button
               // onClick={() => setIsModalOpen(true)}
               onClick={handleRegisterClick}
-              className="group w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-lg mt-8 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-red-900/30 relative overflow-hidden"
+              className="group w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-lg mt-8 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-red-900/30 relative overflow-hidden cursor-pointer"
             >
               <span className="relative z-10">Register Now</span>
               <span className="absolute inset-0 bg-gradient-to-r from-red-500 to-red-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
@@ -248,7 +248,6 @@ export default function EventDetail() {
             <h2 className="text-2xl font-bold mb-6 text-red-500 flex items-center">
               <span className="w-8 h-px bg-red-500 mr-3"></span>
               Contact for Enquiry
-              <Users className="ml-3 h-5 w-5" />
             </h2>
             <p className="text-gray-300 text-lg leading-relaxed">
               {activity.OC} - {activity.OCContact} <br />

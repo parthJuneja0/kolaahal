@@ -47,6 +47,10 @@ export default function Events() {
 
       {/* Hero Section */}
       <div className="relative h-[40vh] md:h-[50vh]">
+        <div className="absolute top-4 right-4 z-50 flex space-x-4">
+          <img src="/assets/miet.png" alt="Logo 1" className="lg:h-12 h-8" />
+          <img src="/assets/image.png" alt="Logo 2" className="lg:h-12 h-8" />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-r from-red-900/30 to-black z-0">
           {/* Pattern overlay */}
           <div

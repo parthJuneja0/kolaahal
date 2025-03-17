@@ -6,16 +6,20 @@ import pythonCodingChallenge from "@/assets/technical/python_coding_challenge.jp
 import roboRace from "@/assets/technical/robo_race.jpg";
 import pharmaNext from "@/assets/technical/pharmaNext.jpg";
 import techDebate from "@/assets/technical/tech_debate.jpg";
-import droneFlying from "@/assets/technical/drone_flying.jpg";
-import foxtrot from "@/assets/cultural/foxtrot.jpg";
-import swarSangam from "@/assets/cultural/swar_sangam.jpg";
-import rampSaga from "@/assets/cultural/ramp_saga.jpg";
+import droneRace from "@/assets/technical/drone_race.jpg";
+import foxtrotSolo from "@/assets/cultural/foxtrot_solo.jpg";
+import foxtrotDuet from "@/assets/cultural/foxtrot_duet.jpg";
+import foxtrotGroup from "@/assets/cultural/foxtrot_group.jpg";
+import swarSangamSolo from "@/assets/cultural/swar_sangam_solo.jpg";
+import swarSangamDuet from "@/assets/cultural/swar_sangam_duet.jpg";
+import swarSangamGroup from "@/assets/cultural/swar_sangam_group.jpg";
+import xtacy from "@/assets/creativity/xtacy.jpg";
 import battleOfBands from "@/assets/cultural/battle_of_bands.jpg";
 import rangmanch from "@/assets/cultural/rangmanch.jpg";
 import spotlightShow from "@/assets/cultural/spotlight_show.jpg";
-import artmania from "@/assets/cultural/artmania.jpg";
-import firelessCooking from "@/assets/creativity/fireless_cooking.jpg";
-import livePainting from "@/assets/creativity/live_painting.jpg";
+import artmania from "@/assets/creativity/artmania.jpg";
+import cookNoFlame from "@/assets/creativity/cook_no_flame.jpg";
+import liveSketching from "@/assets/creativity/live_sketching.jpg";
 import pitchPerfect from "@/assets/creativity/pitch_perfect.jpg";
 import blindfoldMakeup from "@/assets/creativity/blindfold_makeup.jpg";
 import adMadShow from "@/assets/management/ad_mad_show.jpg";
@@ -38,7 +42,7 @@ export const EventsDataProvider = ({ children }) => {
                 time: "1:00 PM - 3:00 PM",
                 venue: "Audi 4",
                 teamSize: "1",
-                prizes: "Winner: Rs.1100, Runner-up: Rs.500",
+                prizes: "Winner: Rs. 1100, Runner-up: Rs. 500",
                 evaluationScheme: "Creativity, Originality, Humor, Relevance to the topic",
                 OC: "Mayur Rastogi",
                 OCContact: "7037386808",
@@ -55,7 +59,7 @@ export const EventsDataProvider = ({ children }) => {
                 time: "1:00 PM - 4:00 PM",
                 venue: "Adjacent to Vishveshwarya block",
                 teamSize: "2 - 3",
-                prizes: "Winner: Rs.1100, Runner-up: Rs.500",
+                prizes: "Winner: Rs. 1100, Runner-up: Rs. 500",
                 evaluationScheme: "First to reach the final destination wins the race.",
                 OC: "Mayur Rastogi",
                 OCContact: "7037386808",
@@ -72,7 +76,7 @@ export const EventsDataProvider = ({ children }) => {
                 time: "10:00 AM - 3:00 PM",
                 venue: "Raman Block (B4) 107",
                 teamSize: "1",
-                prizes: "Winner: Rs.1100, Runner-up: Rs.500",
+                prizes: "Winner: Rs. 1100, Runner-up: Rs. 500",
                 evaluationScheme: "The One with the best output wins the challenge.",
                 OC: "Mayur Rastogi",
                 OCContact: "7037386808",
@@ -89,7 +93,7 @@ export const EventsDataProvider = ({ children }) => {
                 time: "10:00 AM - 4:00 PM",
                 venue: "Volleyball ground",
                 teamSize: "2 - 4",
-                prizes: "Winner: Rs.1500, 1st Runner-up: Rs.1000, 2nd Runner-up: Rs.500",
+                prizes: "Winner: Rs. 1500, 1st Runner-up: Rs. 1000, 2nd Runner-up: Rs. 500",
                 evaluationScheme: "The robot that completes the track in the shortest time wins.",
                 OC: "Mayur Rastogi",
                 OCContact: "7037386808",
@@ -123,7 +127,7 @@ export const EventsDataProvider = ({ children }) => {
                 time: "11:00 AM - 1:00 PM",
                 venue: "Idea Lab",
                 teamSize: "2",
-                prizes: "Winner: Rs.1100, Runner-up: Rs.500",
+                prizes: "Winner: Rs. 1100, Runner-up: Rs. 500",
                 evaluationScheme: "Fluency, Facts and Figures, Communication skills, Active Listening",
                 OC: "Mayur Rastogi",
                 OCContact: "7037386808",
@@ -135,7 +139,7 @@ export const EventsDataProvider = ({ children }) => {
                 title: "Drone Race",
                 description:
                     "Drone Race is an exciting competition where drones, controlled by AI or pilots, fly through tricky tracks at high speed. It tests skill, precision, and technology, making it a fun way to explore the future of flying robots!",
-                image: droneFlying,
+                image: droneRace,
                 date: "28 March 2025",
                 time: "10:00 AM - 1:00 PM",
                 venue: "Volleyball Ground",
@@ -154,7 +158,7 @@ export const EventsDataProvider = ({ children }) => {
                 title: "Foxtrot Solo - Day 1",
                 description:
                     "Step into rhythm, glide with grace—Foxtrot is not just a dance, it's a story in motion! Whether you own the stage solo, flow in a duet, or shine in a group, let the music lead you!",
-                image: foxtrot,
+                image: foxtrotSolo,
                 date: "26 March 2025",
                 time: "2:10 PM - 3:10 PM",
                 venue: "Main Stage",
@@ -171,7 +175,7 @@ export const EventsDataProvider = ({ children }) => {
                 title: "Foxtrot Duet - Day 2",
                 description:
                     "Step into rhythm, glide with grace—Foxtrot is not just a dance, it's a story in motion! Whether you own the stage solo, flow in a duet, or shine in a group, let the music lead you!",
-                image: foxtrot,
+                image: foxtrotDuet,
                 date: "27 March 2025",
                 time: "11:00 AM - 12:00 PM",
                 venue: "Main Stage",
@@ -188,7 +192,7 @@ export const EventsDataProvider = ({ children }) => {
                 title: "Foxtrot Group - Day 2",
                 description:
                     "Step into rhythm, glide with grace—Foxtrot is not just a dance, it's a story in motion! Whether you own the stage solo, flow in a duet, or shine in a group, let the music lead you!",
-                image: foxtrot,
+                image: foxtrotGroup,
                 date: "27 March 2025",
                 time: "3:00 PM - 5:00 PM",
                 venue: "Main Stage",
@@ -205,7 +209,7 @@ export const EventsDataProvider = ({ children }) => {
                 title: "Swar Sangam Solo",
                 description:
                     "Swar Sangam—where every note finds its soul! Whether you mesmerize the stage solo or create magic in a duo and group, let your voice echo with passion and melody. Step up, sing out, and let music unite us!",
-                image: swarSangam,
+                image: swarSangamSolo,
                 date: "26 March 2025",
                 time: "11:00 AM - 12:00 PM",
                 venue: "Main Stage",
@@ -222,7 +226,7 @@ export const EventsDataProvider = ({ children }) => {
                 title: "Swar Sangam Duet",
                 description:
                     "Swar Sangam—where every note finds its soul! Whether you mesmerize the stage solo or create magic in a duo and group, let your voice echo with passion and melody. Step up, sing out, and let music unite us!",
-                image: swarSangam,
+                image: swarSangamDuet,
                 date: "26 March 2025",
                 time: "12:30 PM - 2:00 PM",
                 venue: "Main Stage",
@@ -239,7 +243,7 @@ export const EventsDataProvider = ({ children }) => {
                 title: "Swar Sangam Group",
                 description:
                     "Swar Sangam—where every note finds its soul! Whether you mesmerize the stage solo or create magic in a duo and group, let your voice echo with passion and melody. Step up, sing out, and let music unite us!",
-                image: swarSangam,
+                image: swarSangamGroup,
                 date: "26 March 2025",
                 time: "3:20 PM - 4:00 PM",
                 venue: "Main Stage",
@@ -308,7 +312,7 @@ export const EventsDataProvider = ({ children }) => {
                 title: "Xtacy - The Fashion Show",
                 description:
                     "Xtacy – The Ultimate Runway Affair! Step into the spotlight, where fashion meets passion and confidence becomes couture. Own the stage, redefine elegance, and let your style leave an unforgettable mark!",
-                image: rampSaga,
+                image: xtacy,
                 date: "26 March 2025",
                 time: "4:30 PM - 7:00 PM",
                 venue: "Main Stage",
@@ -325,7 +329,7 @@ export const EventsDataProvider = ({ children }) => {
                 title: "Cook-No-Flame",
                 description:
                     "Cook-No-Flame is a fun and creative event where participants prepare delicious dishes without using fire, testing their culinary skills and creativity.",
-                image: firelessCooking,
+                image: cookNoFlame,
                 date: "26 March 2025",
                 time: "1:00 PM - 3:00 PM",
                 venue: "Raman Block basement",
@@ -342,7 +346,7 @@ export const EventsDataProvider = ({ children }) => {
                 title: "Live Sketching",
                 description:
                     "Participants are required to click the picture of their desired location or scenery and then draw it on the provided A3 sheet.",
-                image: livePainting,
+                image: liveSketching,
                 date: "26 March 2025",
                 time: "2:00 PM - 4:00 PM",
                 venue: "AICTE Idea Lab",
