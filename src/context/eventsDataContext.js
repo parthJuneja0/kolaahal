@@ -44,9 +44,7 @@ export const EventsDataProvider = ({ children }) => {
                 OCContact: "7037386808",
                 EC: "Alishba Aqlim",
                 ECContact: "8171407965",
-                notes: [],
                 fees: 50,
-                registerBool: true
             },
             {
                 title: "Tech Relay",
@@ -63,9 +61,7 @@ export const EventsDataProvider = ({ children }) => {
                 OCContact: "7037386808",
                 EC: "Kartikey Sharma",
                 ECContact: "8864997581",
-                notes: [],
                 fees: 150,
-                registerBool: true
             },
             {
                 title: "Python Coding Challenge",
@@ -82,9 +78,7 @@ export const EventsDataProvider = ({ children }) => {
                 OCContact: "7037386808",
                 EC: "Kartikey Sharma",
                 ECContact: "8864997581",
-                notes: [],
                 fees: 50,
-                registerBool: true
             },
             {
                 title: "Robo Race",
@@ -101,9 +95,7 @@ export const EventsDataProvider = ({ children }) => {
                 OCContact: "7037386808",
                 EC: "Vishwajeet",
                 ECContact: "9858568272",
-                notes: [],
                 fees: 150,
-                registerBool: true
             },
             {
                 title: "PharmaNext",
@@ -114,15 +106,13 @@ export const EventsDataProvider = ({ children }) => {
                 time: "10:00 AM - 4:00 PM",
                 venue: "Expo Stalls",
                 teamSize: "2 - 4",
-                prizes: "Certificates and prizes",
-                evaluationScheme: "U.G/ P.G. students. Each team must contain max. 4 students and shortlisting for the final presentation will be based on the project description video. Submission requirements: A detailed proposal pitch video outlining the problem, solution, impact.",
+                prizes: "Certificates and Prizes",
+                evaluationScheme: "Project description video, Detailed proposal pitch video outlining the problem, solution, impact.",
                 OC: "Mayur Rastogi",
                 OCContact: "7037386808",
                 EC: "Arsha Mittal",
                 ECContact: "8882461539",
-                notes: [],
                 fees: 150,
-                registerBool: true
             },
             {
                 title: "Tech Debate",
@@ -139,9 +129,7 @@ export const EventsDataProvider = ({ children }) => {
                 OCContact: "7037386808",
                 EC: "Kartikey Sharma",
                 ECContact: "8864997581",
-                notes: [],
                 fees: 100,
-                registerBool: true
             },
             {
                 title: "Drone Race",
@@ -158,9 +146,7 @@ export const EventsDataProvider = ({ children }) => {
                 OCContact: "7037386808",
                 EC: "Shantanu",
                 ECContact: "9027308517",
-                notes: [],
                 fees: 150,
-                registerBool: true
             },
         ],
         cultural: [
@@ -179,9 +165,7 @@ export const EventsDataProvider = ({ children }) => {
                 OCContact: "8700467603",
                 EC: "Chetan Kumar",
                 ECContact: "8439099891",
-                notes: [],
                 fees: 50,
-                registerBool: true
             },
             {
                 title: "Foxtrot Duet - Day 2",
@@ -198,9 +182,7 @@ export const EventsDataProvider = ({ children }) => {
                 OCContact: "8700467603",
                 EC: "Chetan Kumar",
                 ECContact: "8439099891",
-                notes: [],
                 fees: 100,
-                registerBool: true
             },
             {
                 title: "Foxtrot Group - Day 2",
@@ -217,9 +199,7 @@ export const EventsDataProvider = ({ children }) => {
                 OCContact: "8700467603",
                 EC: "Chetan Kumar",
                 ECContact: "8439099891",
-                notes: [],
                 fees: 350,
-                registerBool: true
             },
             {
                 title: "Swar Sangam Solo",
@@ -236,9 +216,7 @@ export const EventsDataProvider = ({ children }) => {
                 OCContact: "8700467603",
                 EC: "Nikshy Goliyan",
                 ECContact: "7668772059",
-                notes: [],
                 fees: 50,
-                registerBool: true
             },
             {
                 title: "Swar Sangam Duet",
@@ -255,9 +233,7 @@ export const EventsDataProvider = ({ children }) => {
                 OCContact: "8700467603",
                 EC: "Nikshy Goliyan",
                 ECContact: "7668772059",
-                notes: [],
                 fees: 100,
-                registerBool: true
             },
             {
                 title: "Swar Sangam Group",
@@ -274,9 +250,7 @@ export const EventsDataProvider = ({ children }) => {
                 OCContact: "8700467603",
                 EC: "Nikshy Goliyan",
                 ECContact: "7668772059",
-                notes: [],
                 fees: 200,
-                registerBool: true
             },
             {
                 title: "Rangmanch - Skit/Nukkad Natak",
@@ -292,9 +266,7 @@ export const EventsDataProvider = ({ children }) => {
                 OCContact: "8700467603",
                 EC: "Shivansh Saini",
                 ECContact: "7520271225",
-                notes: [],
                 fees: 200,
-                registerBool: true
             },
             {
                 title: "Battle of Bands",
@@ -305,15 +277,13 @@ export const EventsDataProvider = ({ children }) => {
                 time: "12:00 PM - 3:00 PM",
                 venue: "Main Stage",
                 teamSize: "Min 4",
-                prizes: "1st Prize: Rs. 11000, 2nd Prize: Rs. 5100, 3rd Prize: Rs. 2100",
+                prizes: "Winner: Rs. 11000, 1st Runner-up: Rs. 5100, 2nd Runner-up: Rs. 2100",
                 evaluationScheme: "Stage Presence, Harmony and Synchronization, Crowd Engagement, Vocal Technique, Uniqueness",
                 OC: "Mahi",
                 OCContact: "8700467603",
                 EC: "Mayank Tamta",
                 ECContact: "8923166035",
-                notes: [],
                 fees: 350,
-                registerBool: true
             },
             {
                 title: "Spotlight show - Open Mic",
@@ -330,16 +300,14 @@ export const EventsDataProvider = ({ children }) => {
                 OCContact: "8700467603",
                 EC: "Rajnandni",
                 ECContact: "7006013317",
-                notes: [],
                 fees: 0,
-                registerBool: true
             },
         ],
         creativity: [
             {
-                title: "Ecstacy - The Fashion Show",
+                title: "Xtacy - The Fashion Show",
                 description:
-                    "Ecstasy – The Ultimate Runway Affair! Step into the spotlight, where fashion meets passion and confidence becomes couture. Own the stage, redefine elegance, and let your style leave an unforgettable mark!",
+                    "Xtacy – The Ultimate Runway Affair! Step into the spotlight, where fashion meets passion and confidence becomes couture. Own the stage, redefine elegance, and let your style leave an unforgettable mark!",
                 image: rampSaga,
                 date: "26 March 2025",
                 time: "4:30 PM - 7:00 PM",
@@ -351,9 +319,7 @@ export const EventsDataProvider = ({ children }) => {
                 OCContact: "9258817121",
                 EC: "Tanisha Sharma",
                 ECContact: "9027557677",
-                notes: [],
                 fees: 0,
-                registerBool: true
             },
             {
                 title: "Cook-No-Flame",
@@ -370,9 +336,7 @@ export const EventsDataProvider = ({ children }) => {
                 OCContact: "9258817121",
                 EC: "Vanshika Vashishth",
                 ECContact: "7217325226",
-                notes: [],
                 fees: 80,
-                registerBool: true
             },
             {
                 title: "Live Sketching",
@@ -389,9 +353,7 @@ export const EventsDataProvider = ({ children }) => {
                 OCContact: "9258817121",
                 EC: "Vishal Jain",
                 ECContact: "6397151942",
-                notes: [],
                 fees: 50,
-                registerBool: true
             },
             {
                 title: "Pitch perfect",
@@ -403,14 +365,12 @@ export const EventsDataProvider = ({ children }) => {
                 venue: "AICTE Idea Lab",
                 teamSize: "1 - 3",
                 prizes: "Winner: 2100, 1st Runner-up: 1100, 2nd Runner-up: 500",
-                evaluationScheme: "",
+                evaluationScheme: "Business Idea, Presentation, Communication Skills, Clarity of Thought, Relevance to the Topic",
                 OC: "Kashish Sharma",
                 OCContact: "9258817121",
                 EC: "Stuti Kumar",
                 ECContact: "7906274257",
-                notes: [],
                 fees: 150,
-                registerBool: true
             },
             {
                 title: "Blindfold Makeup",
@@ -427,9 +387,7 @@ export const EventsDataProvider = ({ children }) => {
                 OCContact: "9258817121",
                 EC: "Lucky Tomar",
                 ECContact: "9193107757",
-                notes: [],
                 fees: 100,
-                registerBool: true
             },
             {
                 title: "Artmania - Wall Painting",
@@ -440,15 +398,13 @@ export const EventsDataProvider = ({ children }) => {
                 time: "9:30 AM - 5:00 PM ",
                 venue: "Canteen Wall",
                 teamSize: "2 - 3",
-                prizes: "Rs. 1100",
+                prizes: "Winner: Rs. 1100",
                 evaluationScheme: "Creativity & Originality, Theme Relevance, Technique & Skil, Composition & Aesthetic Appeal, Overall Presentation & ImpacT",
                 OC: "Kashish Sharma",
                 OCContact: "9258817121",
                 EC: "Vipanshi Kundral",
                 ECContact: "7051158951",
-                notes: [],
                 fees: 50,
-                registerBool: true
             },
         ],
         management: [
@@ -467,9 +423,7 @@ export const EventsDataProvider = ({ children }) => {
                 OCContact: "7983056642",
                 EC: "Sarthak",
                 ECContact: "7302672818",
-                notes: [],
                 fees: 200,
-                registerBool: true
             },
             {
                 title: "Extempore",
@@ -486,9 +440,7 @@ export const EventsDataProvider = ({ children }) => {
                 OCContact: "7983056642",
                 EC: "Akash Tomar",
                 ECContact: "8395059673",
-                notes: [],
                 fees: 50,
-                registerBool: true
             },
             {
                 title: "Business Plan",
@@ -505,9 +457,7 @@ export const EventsDataProvider = ({ children }) => {
                 OCContact: "7983056642",
                 EC: "Mukul Sharma",
                 ECContact: "7037733688",
-                notes: [],
                 fees: 150,
-                registerBool: true
             },
             {
                 title: "Business Quiz",
@@ -524,9 +474,7 @@ export const EventsDataProvider = ({ children }) => {
                 OCContact: "7983056642",
                 EC: "Abhishek Singh",
                 ECContact: "9058285845",
-                notes: [],
                 fees: 150,
-                registerBool: true
             },
             {
                 title: "Collage Making",
@@ -543,9 +491,7 @@ export const EventsDataProvider = ({ children }) => {
                 OCContact: "7983056642",
                 EC: "Megha Singh",
                 ECContact: "7455988843",
-                notes: [],
                 fees: 150,
-                registerBool: true
             },
         ],
     };

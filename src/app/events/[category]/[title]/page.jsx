@@ -13,6 +13,9 @@ import {
 } from "lucide-react";
 import { eventsDataContext } from "@/context/eventsDataContext";
 import Image from "next/image";
+import { AiOutlineTeam } from "react-icons/ai";
+import { FaRupeeSign } from "react-icons/fa";
+import { LuCircleAlert } from "react-icons/lu";
 
 export default function EventDetail() {
   const params = useParams();
@@ -22,6 +25,13 @@ export default function EventDetail() {
   useEffect(() => {
     setIsLoaded(true);
   }, []);
+
+  const [showToast, setShowToast] = useState(false);
+
+  const handleRegisterClick = () => {
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000); // Hide after 3 seconds
+  };
 
   const { activities } = useContext(eventsDataContext);
 
@@ -159,7 +169,7 @@ export default function EventDetail() {
               </div>
             </div>
             <div className="flex items-start hover:translate-x-1 transition-transform duration-300">
-              <MapPin className="h-6 w-6 text-red-500 mr-4 flex-shrink-0 mt-1" />
+              <AiOutlineTeam className="h-6 w-6 text-red-500 mr-4 flex-shrink-0 mt-1" />
               <div>
                 <h3 className="text-gray-400 text-sm font-medium">Team Size</h3>
                 <p className="text-white text-lg font-medium">
@@ -168,7 +178,7 @@ export default function EventDetail() {
               </div>
             </div>
             <div className="flex items-start hover:translate-x-1 transition-transform duration-300">
-              <MapPin className="h-6 w-6 text-red-500 mr-4 flex-shrink-0 mt-1" />
+              <FaRupeeSign className="h-6 w-6 text-red-500 mr-4 flex-shrink-0 mt-1" />
               <div>
                 <h3 className="text-gray-400 text-sm font-medium">
                   Registration Fees
@@ -178,15 +188,16 @@ export default function EventDetail() {
                 </p>
               </div>
             </div>
-            <Link href={`/events/${category}/${title}/register`} passHref>
-              <button
-                onClick={() => setIsModalOpen(true)}
-                className="group w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-lg mt-8 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-red-900/30 relative overflow-hidden"
-              >
-                <span className="relative z-10">Register Now</span>
-                <span className="absolute inset-0 bg-gradient-to-r from-red-500 to-red-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-              </button>
-            </Link>
+            {/* <Link href={`/events/${category}/${title}/register`} passHref> */}
+            <button
+              // onClick={() => setIsModalOpen(true)}
+              onClick={handleRegisterClick}
+              className="group w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-lg mt-8 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-red-900/30 relative overflow-hidden"
+            >
+              <span className="relative z-10">Register Now</span>
+              <span className="absolute inset-0 bg-gradient-to-r from-red-500 to-red-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+            </button>
+            {/* </Link> */}
           </div>
         </div>
 
@@ -263,8 +274,8 @@ export default function EventDetail() {
             </div>
           </div>
 
-          {/* Rules and Regulations */}
-          <div
+          {/* Rules */}
+          {/* <div
             className={`pb-12 transition-all duration-700 delay-750 transform ${
               isLoaded
                 ? "translate-y-0 opacity-100"
@@ -287,9 +298,39 @@ export default function EventDetail() {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
         </div>
+        {/* Toast Notification */}
+        {showToast && (
+          <div
+            id="toast-default"
+            className="fixed bottom-5 right-5 z-[100] flex items-center max-w-xs p-4 text-white bg-gray-900 rounded-lg shadow-lg animate-slide-in"
+            role="alert"
+          >
+            <div className="inline-flex items-center justify-center w-8 h-8 text-blue-500 bg-blue-100 rounded-lg">
+              <LuCircleAlert />
+            </div>
+            <div className="ml-3 text-sm font-medium">
+              Registration opening very soon...
+            </div>
+          </div>
+        )}
       </div>
+      <style jsx>{`
+        @keyframes slide-in {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-slide-in {
+          animation: slide-in 0.3s ease-out;
+        }
+      `}</style>
     </div>
   );
 }
