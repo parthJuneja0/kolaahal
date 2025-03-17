@@ -1,5 +1,4 @@
 "use client";
-
 import { useParams } from "next/navigation";
 import Head from "next/head";
 import Link from "next/link";
@@ -9,13 +8,10 @@ import {
   Calendar,
   Clock,
   MapPin,
-  Ticket,
   Trophy,
-  Share2,
   Users,
 } from "lucide-react";
 import { eventsDataContext } from "@/context/eventsDataContext";
-import { stringify } from "postcss";
 import Image from "next/image";
 
 export default function EventDetail() {
@@ -144,7 +140,6 @@ export default function EventDetail() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-start hover:translate-x-1 transition-transform duration-300">
               <Clock className="h-6 w-6 text-red-500 mr-4 flex-shrink-0 mt-1" />
               <div>
@@ -154,7 +149,6 @@ export default function EventDetail() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-start hover:translate-x-1 transition-transform duration-300">
               <MapPin className="h-6 w-6 text-red-500 mr-4 flex-shrink-0 mt-1" />
               <div>
@@ -164,23 +158,24 @@ export default function EventDetail() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-start hover:translate-x-1 transition-transform duration-300">
-              <Calendar className="h-6 w-6 text-red-500 mr-4 flex-shrink-0 mt-1" />
+              <MapPin className="h-6 w-6 text-red-500 mr-4 flex-shrink-0 mt-1" />
               <div>
-                <h3 className="text-gray-400 text-sm font-medium">
-                  Registration Period
-                </h3>
+                <h3 className="text-gray-400 text-sm font-medium">Team Size</h3>
                 <p className="text-white text-lg font-medium">
-                  {activity.registrationPeriod}
+                  {activity.teamSize}
                 </p>
               </div>
             </div>
-
-            <button className="group w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-lg mt-8 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-red-900/30 relative overflow-hidden">
-              <span className="relative z-10">Register Now</span>
-              <span className="absolute inset-0 bg-gradient-to-r from-red-500 to-red-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-            </button>
+            <Link href={`/events/${category}/${title}/register`} passHref>
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="group w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-lg mt-8 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-red-900/30 relative overflow-hidden"
+              >
+                <span className="relative z-10">Register Now</span>
+                <span className="absolute inset-0 bg-gradient-to-r from-red-500 to-red-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+              </button>
+            </Link>
           </div>
         </div>
 
@@ -203,7 +198,7 @@ export default function EventDetail() {
             </p>
           </div>
 
-          {/* Eligibility */}
+          {/* Evaluation Scheme */}
           <div
             className={`transition-all duration-700 delay-600 transform ${
               isLoaded
@@ -213,17 +208,16 @@ export default function EventDetail() {
           >
             <h2 className="text-2xl font-bold mb-6 text-red-500 flex items-center">
               <span className="w-8 h-px bg-red-500 mr-3"></span>
-              Eligibility
-              <Users className="ml-3 h-5 w-5" />
+              Evaluation Scheme
             </h2>
             <p className="text-gray-300 text-lg leading-relaxed">
-              {activity.eligibility}
+              {activity.evaluationScheme}
             </p>
           </div>
 
-          {/* Rules and Regulations */}
+          {/* Contact for Enquiry */}
           <div
-            className={`transition-all duration-700 delay-750 transform ${
+            className={`transition-all duration-700 delay-600 transform ${
               isLoaded
                 ? "translate-y-0 opacity-100"
                 : "translate-y-20 opacity-0"
@@ -231,25 +225,18 @@ export default function EventDetail() {
           >
             <h2 className="text-2xl font-bold mb-6 text-red-500 flex items-center">
               <span className="w-8 h-px bg-red-500 mr-3"></span>
-              Rules and Regulations
+              Contact for Enquiry
+              <Users className="ml-3 h-5 w-5" />
             </h2>
-            <ul className="text-gray-300 space-y-4">
-              {activity.rules.map((rule, index) => (
-                <li key={index} className="flex items-start group">
-                  <span className="bg-gray-800 text-red-500 rounded-full h-6 w-6 flex items-center justify-center mr-4 mt-1 font-bold text-sm group-hover:bg-red-600 group-hover:text-white transition-colors duration-300">
-                    {index + 1}
-                  </span>
-                  <span className="text-lg leading-relaxed group-hover:text-white transition-colors duration-300">
-                    {rule}
-                  </span>
-                </li>
-              ))}
-            </ul>
+            <p className="text-gray-300 text-lg leading-relaxed">
+              {activity.OC} - {activity.OCContact} <br />
+              {activity.EC} - {activity.ECContact}
+            </p>
           </div>
 
           {/* Prizes */}
           <div
-            className={`pb-12 transition-all duration-700 delay-900 transform ${
+            className={`transition-all duration-700 delay-900 transform ${
               isLoaded
                 ? "translate-y-0 opacity-100"
                 : "translate-y-20 opacity-0"
@@ -263,6 +250,32 @@ export default function EventDetail() {
               <Trophy className="h-8 w-8 text-yellow-500 mr-5" />
               <p className="text-gray-300 text-lg">{activity.prizes}</p>
             </div>
+          </div>
+
+          {/* Rules and Regulations */}
+          <div
+            className={`pb-12 transition-all duration-700 delay-750 transform ${
+              isLoaded
+                ? "translate-y-0 opacity-100"
+                : "translate-y-20 opacity-0"
+            }`}
+          >
+            <h2 className="text-2xl font-bold mb-6 text-red-500 flex items-center">
+              <span className="w-8 h-px bg-red-500 mr-3"></span>
+              Note
+            </h2>
+            <ul className="text-gray-300 space-y-4">
+              {activity.notes.map((rule, index) => (
+                <li key={index} className="flex items-start group">
+                  <span className="bg-gray-800 text-red-500 rounded-full h-6 w-6 flex items-center justify-center mr-4 mt-1 font-bold text-sm group-hover:bg-red-600 group-hover:text-white transition-colors duration-300">
+                    {index + 1}
+                  </span>
+                  <span className="text-lg leading-relaxed group-hover:text-white transition-colors duration-300">
+                    {rule}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
