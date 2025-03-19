@@ -11,8 +11,8 @@ import {
   push,
   query,
   ref,
+  update,
 } from "firebase/database";
-import kolaahal from "@/assets/kolaahal.png";
 import Image from "next/image";
 import { userContext } from "@/context/userContext";
 
@@ -109,7 +109,6 @@ export default function RegistrationForm() {
     branch: "",
     year: "",
     contactNo: "",
-    // email: "",
   });
 
   const [formFocus, setFormFocus] = useState({
@@ -119,7 +118,6 @@ export default function RegistrationForm() {
     branch: false,
     year: false,
     contactNo: false,
-    // email: false,
   });
 
   // Track if we're in the browser
@@ -155,10 +153,29 @@ export default function RegistrationForm() {
       ...prev,
       [field]: false,
     }));
+
+    // Validate phone number length
+    if (field === "contactNo" && formData.contactNo.length !== 10) {
+      setError("Phone number must be exactly 10 digits");
+    } else {
+      setError(""); // Clear error if valid
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (userData?.activityCount >= 3) {
+      setError(
+        "You have reached the limit of 3 registrations. Please contact the admin for more details."
+      );
+      return;
+    }
+
+    if (formData.contactNo.length !== 10) {
+      setError("Phone number must be exactly 10 digits");
+      return;
+    }
 
     try {
       const formRef = ref(
@@ -175,11 +192,46 @@ export default function RegistrationForm() {
 
       if (snapshot.exists()) {
         setError("You have already registered for this event.");
-      } else {
-        await push(formRef, { ...formData, email: userData.email });
-        console.log("Form submitted successfully:", formData);
-        setFormData({ name: "", email: "" }); // Reset form on success
+        return;
       }
+
+      // Push the new registration data
+      await push(formRef, { ...formData, email: userData.email });
+
+      // Query the users collection to find userId by email
+      const usersRef = ref(db, "users");
+      const userQuery = query(
+        usersRef,
+        orderByChild("email"),
+        equalTo(userData.email)
+      );
+      const userSnapshot = await get(userQuery);
+
+      if (userSnapshot.exists()) {
+        // Firebase returns an object where the key is the userId
+        const userId = Object.keys(userSnapshot.val())[0]; // Extract the userId
+        const userData = userSnapshot.val()[userId]; // Get user data
+
+        // Increment activityCount
+        const currentActivityCount = userData.activityCount || 0;
+        await update(ref(db, `users/${userId}`), {
+          activityCount: currentActivityCount + 1,
+        });
+
+        console.log("Activity count updated for user:", userId);
+      } else {
+        console.error("User not found with email:", userData.email);
+      }
+
+      console.log("Form submitted successfully:", formData);
+      setFormData({
+        name: "",
+        college: "",
+        course: "",
+        branch: "",
+        year: "",
+        contactNo: "",
+      });
     } catch (error) {
       console.error("Error submitting form:", error);
       setError("Something went wrong. Please try again.");
@@ -236,7 +288,13 @@ export default function RegistrationForm() {
 
       <div className="w-full max-w-5xl flex flex-col md:flex-row rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(255,0,0,0.2)] bg-gradient-to-br from-gray-900 to-black relative z-10 border border-gray-800">
         {/* Left Panel - Decorative */}
-        <Image src={kolaahal} alt="Kolaahal" className="w-96" />
+        <Image
+          src={"/assets/kolaahal.png"}
+          width={300}
+          height={400}
+          alt="Kolaahal"
+          className="w-96"
+        />
 
         {/* Right Panel - Form */}
         <div className="md:w-3/5 p-10 relative">
@@ -271,7 +329,7 @@ export default function RegistrationForm() {
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-2">
                 {[
                   {
                     id: "name",
@@ -385,50 +443,39 @@ export default function RegistrationForm() {
                     ></div>
                   </div>
                 </div>
-
-                {/* Email */}
-                {/* <div className="space-y-1 md:col-span-2 group">
-                  <label
-                    htmlFor="email"
-                    className={`text-sm font-medium transition-colors duration-300 ${
-                      formFocus.email ? "text-red-400" : "text-gray-400"
-                    }`}
-                  >
-                    Email ID
-                  </label>
-                  <div className="relative">
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      placeholder="your.email@example.com"
-                      value={formData.email}
-                      onChange={handleChange}
-                      onFocus={() => handleFocus("email")}
-                      onBlur={() => handleBlur("email")}
-                      className="w-full px-4 py-3 rounded-lg bg-gray-800/30 border border-gray-700 text-white focus:outline-none focus:ring-1 focus:ring-red-500/50 focus:border-red-500/50 transition-all duration-300 placeholder:text-gray-600"
-                      required
-                    />
-                    <div
-                      className={`absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-red-500 to-transparent transform transition-transform duration-300 ${
-                        formFocus.email ? "scale-x-100" : "scale-x-0"
-                      }`}
-                    ></div>
-                  </div>
-                </div> */}
               </div>
-
+              {error && (
+                <div className="text-red-500 text-sm mb-0">{error}</div>
+              )}
               <div className="pt-6">
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-red-700 to-red-900 hover:from-red-800 hover:to-red-950 text-white font-bold py-4 px-6 rounded-lg transition duration-300 transform hover:translate-y-[-2px] focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 shadow-lg shadow-red-900/20 relative overflow-hidden group"
+                  disabled={!userData || userData?.activityCount >= 3}
+                  className={`w-full font-bold py-4 px-6 rounded-lg transition duration-300 transform focus:outline-none focus:ring-2 shadow-lg relative overflow-hidden group 
+    ${
+      !userData || userData?.activityCount >= 3
+        ? "bg-gray-600 cursor-not-allowed text-gray-300 shadow-none"
+        : "bg-gradient-to-r from-red-700 to-red-900 hover:from-red-800 hover:to-red-950 text-white shadow-red-900/20 hover:translate-y-[-2px] focus:ring-red-500 focus:ring-opacity-50 cursor-pointer"
+    }`}
                 >
-                  <span className="relative z-10">Submit</span>
-                  <span className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                  <span className="absolute top-0 left-0 w-full h-full bg-white/10 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></span>
+                  <span className="relative z-10">
+                    {!userData
+                      ? "Login to Register"
+                      : userData?.activityCount >= 3
+                      ? "Limit Reached"
+                      : "Submit"}
+                  </span>
 
-                  {/* Animated particles on hover - only render on client */}
-                  {isClient && (
+                  {/* Background gradient hover effect (only applies when enabled) */}
+                  {!(!userData || userData?.activityCount >= 3) && (
+                    <>
+                      <span className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                      <span className="absolute top-0 left-0 w-full h-full bg-white/10 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></span>
+                    </>
+                  )}
+
+                  {/* Animated particles on hover - only render on client when enabled */}
+                  {isClient && !(!userData || userData?.activityCount >= 3) && (
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       {[...Array(5)].map((_, i) => (
                         <div

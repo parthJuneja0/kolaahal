@@ -4,7 +4,6 @@ import { useState, useEffect, useContext } from "react";
 import { Uncial_Antiqua, Nanum_Gothic } from "next/font/google";
 const uncialAntiqua = Uncial_Antiqua({ subsets: ["latin"], weight: ["400"] });
 const nanumGothic = Nanum_Gothic({ subsets: ["latin"], weight: ["400"] });
-import kolaahal from "@/assets/kolaahal.png";
 import Image from "next/image";
 import {
   equalTo,
@@ -99,7 +98,7 @@ const AnimatedSparkles = () => {
 
 export default function RegistrationForm() {
   const router = useRouter();
-  const { userData, setUserData } = useContext(userContext);
+  const { userData, userId, setUserId } = useContext(userContext);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -172,6 +171,25 @@ export default function RegistrationForm() {
       ...prev,
       [field]: false,
     }));
+
+    if (signInOrSignUp === "sign-up") {
+      if (field === "contactNo" && formData.contactNo.length !== 10) {
+        setError("Phone number must be exactly 10 digits");
+      } else if (field === "password") {
+        const passwordRegex =
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+        if (!passwordRegex.test(formData.password)) {
+          setError(
+            "Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, a number, and a special character."
+          );
+        } else {
+          setError("");
+        }
+      } else {
+        setError("");
+      }
+    }
   };
 
   const toggleEmailModal = () => {
@@ -193,7 +211,7 @@ export default function RegistrationForm() {
         const snapshot = await get(emailQuery);
 
         if (snapshot.exists()) {
-          const userData = Object.values(snapshot.val())[0]; // Get the first matching user
+          const [userId, userData] = Object.entries(snapshot.val())[0]; // Get ID and data
           const storedHashedPassword = userData.password;
 
           // Compare hashed password with entered password
@@ -203,7 +221,8 @@ export default function RegistrationForm() {
           );
 
           if (isMatch) {
-            setUserData(userData);
+            setUserId(userId);
+            console.log("User ID:", userId);
           } else {
             setError("Incorrect password. Please try again.");
           }
@@ -215,14 +234,24 @@ export default function RegistrationForm() {
         setError("Something went wrong. Please try again.");
       }
     } else {
+      // Password validation
+      const passwordRegex =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+      if (!passwordRegex.test(formData.password)) {
+        setError(
+          "Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, a number, and a special character."
+        );
+        return;
+      }
       setEmailModalOpen(true);
     }
   };
 
   useEffect(() => {
-    if (!userData) return;
+    if (!userId) return;
     router.push("/");
-  }, [userData]);
+  }, [userId]);
 
   const handleSignUp = async () => {
     setEmailModalOpen(false);
@@ -326,13 +355,7 @@ export default function RegistrationForm() {
       })
         .then((snapshot) => {
           if (snapshot) {
-            // Set user data only after successful upload
-            setUserData({
-              ...formData,
-              password: passwordHash, // Store hashed password
-              timestamp: Date.now(),
-              activityCount: 0,
-            });
+            setUserId(snapshot.key);
           }
         })
         .catch((error) => {
@@ -343,13 +366,6 @@ export default function RegistrationForm() {
       setError("Incorrect OTP. Please try again.");
     }
   };
-
-  useEffect(() => {
-    if (userData) {
-      setFormData({ name: "", email: "", password: "" });
-      router.push("/");
-    }
-  }, [userData]);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-black to-gray-900 flex items-center justify-center p-4 relative overflow-hidden">
@@ -426,7 +442,13 @@ export default function RegistrationForm() {
 
       <div className="w-full max-w-5xl flex flex-col md:flex-row rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(255,0,0,0.2)] bg-gradient-to-br from-gray-900 to-black relative z-10 border border-gray-800">
         {/* Left Panel - Decorative */}
-        <Image src={kolaahal} alt="Kolaahal" className="w-96" />
+        <Image
+          src={"/assets/kolaahal.png"}
+          width={400}
+          height={400}
+          alt="Kolaahal"
+          className="w-96"
+        />
 
         {/* Right Panel - Form */}
         <div className="md:w-3/5 p-10 relative">
@@ -559,7 +581,7 @@ export default function RegistrationForm() {
                 >
                   {signInOrSignUp === "sign-in" ? "Create Account" : "Sign In"}
                 </div>
-                <div className="w-full text-sm text-red-500 space-y-1 md:col-span-2 group">
+                <div className="w-full text-sm text-red-500 space-y-1 md:col-span-2 group pr-16">
                   {error}
                 </div>
                 <div>

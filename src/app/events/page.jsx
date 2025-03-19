@@ -159,66 +159,68 @@ export default function Events() {
 
         {/* Activity Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-20">
-          {Object.values(activities[activeTab]).map((activity, index) => (
-            <Link
-              key={activity.title}
-              href={`/events/${activeTab}/${activity.title}`}
-              passHref
-            >
-              <div
-                className={`group bg-gray-900 rounded-xl overflow-hidden shadow-xl ${
-                  animateCards
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-10"
-                } transition-all duration-500`}
-                style={{ transitionDelay: `${index * 75}ms` }}
+          {activities &&
+            activities[activeTab] &&
+            Object.values(activities[activeTab]).map((activity, index) => (
+              <Link
+                key={activity.title}
+                href={`/events/${activeTab}/${activity.title}`}
+                passHref
               >
-                <div className="relative overflow-hidden">
-                  <Image
-                    width={400}
-                    height={400}
-                    src={activity.image}
-                    alt={activity.title}
-                    className="object-contain w-full h-full group-hover:scale-110 transition-transform duration-700 ease-out"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                <div
+                  className={`group bg-gray-900 rounded-xl overflow-hidden shadow-xl ${
+                    animateCards
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-10"
+                  } transition-all duration-500`}
+                  style={{ transitionDelay: `${index * 75}ms` }}
+                >
+                  <div className="relative overflow-hidden">
+                    <Image
+                      width={400}
+                      height={400}
+                      src={`/assets/${activeTab}/${activity.title}.jpg`}
+                      alt={activity.title}
+                      className="object-contain w-full h-full group-hover:scale-110 transition-transform duration-700 ease-out"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
 
-                  {/* Red accent line */}
-                  <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-red-600 to-red-900 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-                </div>
+                    {/* Red accent line */}
+                    <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-red-600 to-red-900 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                  </div>
 
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-red-500 transition-colors duration-300">
-                    {activity.title}
-                  </h3>
-                  <p className="text-gray-400">
-                    {activity.description.substring(0, 100) + "..."}
-                  </p>
+                  <div className="p-6">
+                    <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-red-500 transition-colors duration-300">
+                      {activity.title}
+                    </h3>
+                    <p className="text-gray-400">
+                      {activity.description.substring(0, 100) + "..."}
+                    </p>
 
-                  <div className="mt-6 flex justify-between items-center">
-                    <span className="text-xs text-red-400 uppercase tracking-wider font-medium">
-                      {categories.find((c) => c.id === activeTab).name}
-                    </span>
-                    <span className="inline-flex items-center text-white text-sm font-medium group-hover:translate-x-1 transition-transform duration-300">
-                      Details
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4 ml-1 text-red-500"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </span>
+                    <div className="mt-6 flex justify-between items-center">
+                      <span className="text-xs text-red-400 uppercase tracking-wider font-medium">
+                        {categories.find((c) => c.id === activeTab).name}
+                      </span>
+                      <span className="inline-flex items-center text-white text-sm font-medium group-hover:translate-x-1 transition-transform duration-300">
+                        Details
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-4 w-4 ml-1 text-red-500"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))}
         </div>
       </main>
 

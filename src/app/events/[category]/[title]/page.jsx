@@ -14,7 +14,6 @@ import {
 import { eventsDataContext } from "@/context/eventsDataContext";
 import Image from "next/image";
 import { AiOutlineTeam } from "react-icons/ai";
-import { FaRupeeSign } from "react-icons/fa";
 import { LuCircleAlert } from "react-icons/lu";
 import { userContext } from "@/context/userContext";
 
@@ -42,8 +41,8 @@ export default function EventDetail() {
     !category ||
     !title ||
     !activities[category] ||
-    !Array.isArray(activities[category]) ||
-    !activities[category].some(
+    Object.values(activities[category]).length <= 0 ||
+    !Object.values(activities[category]).some(
       (item) => item.title === decodeURIComponent(title)
     )
   ) {
@@ -70,7 +69,7 @@ export default function EventDetail() {
     );
   }
 
-  const activity = activities[category]?.find(
+  const activity = Object.values(activities[category])?.find(
     (item) => item.title === decodeURIComponent(title)
   );
   const categoryLabel = category.charAt(0).toUpperCase() + category.slice(1);
@@ -127,8 +126,8 @@ export default function EventDetail() {
             }`}
           >
             <Image
-              src={activity.image}
-              hieght={400}
+              src={`/assets/${category}/${activity.title}.jpg`}
+              height={400}
               width={400}
               alt={activity.title}
               className="object-cover rounded-lg shadow-xl shadow-red-900/10 hover:shadow-red-900/30 transition-shadow duration-300 w-96 h-96"
@@ -179,33 +178,25 @@ export default function EventDetail() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start hover:translate-x-1 transition-transform duration-300">
-              <FaRupeeSign className="h-6 w-6 text-red-500 mr-4 flex-shrink-0 mt-1" />
-              <div>
-                <h3 className="text-gray-400 text-sm font-medium">
-                  Registration Fees
-                </h3>
-                <p className="text-white text-lg font-medium">
-                  {activity.fees}
-                </p>
-              </div>
-            </div>
             <Link href={`/events/${category}/${title}/register`} passHref>
               <button
-                // onClick={handleRegisterClick}
-                disabled={userData ? false : true}
+                // onClick={() => {
+                //   handleRegisterClick();
+                // }}
+                disabled={!userData || userData?.activityCount >= 3}
                 className={`group w-full ${
-                  userData
-                    ? "bg-red-600 hover:bg-red-700"
-                    : "bg-gray-700 hover:bg-gray-600"
+                  !userData || userData?.activityCount >= 3
+                    ? "bg-gray-700 cursor-not-allowed hover:bg-gray-600"
+                    : "bg-red-600 hover:bg-red-700"
                 } text-white font-bold py-4 px-8 rounded-lg mt-8 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-red-900/30 relative overflow-hidden cursor-pointer`}
               >
-                <span className="relative z-10">Register Now</span>
-                <span
-                  className={`absolute inset-0 bg-gradient-to-r ${
-                    userData ? "from-red-500 to-red-700" : ""
-                  } opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-                ></span>
+                <span className="relative z-10">
+                  {!userData
+                    ? "Login to Register"
+                    : userData?.activityCount >= 3
+                    ? "Limit Reached"
+                    : "Register Now"}
+                </span>
               </button>
             </Link>
           </div>
