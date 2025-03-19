@@ -16,8 +16,10 @@ import Image from "next/image";
 import { AiOutlineTeam } from "react-icons/ai";
 import { FaRupeeSign } from "react-icons/fa";
 import { LuCircleAlert } from "react-icons/lu";
+import { userContext } from "@/context/userContext";
 
 export default function EventDetail() {
+  const { userData } = useContext(userContext);
   const params = useParams();
   const { category, title } = params;
   const [isLoaded, setIsLoaded] = useState(false);
@@ -26,12 +28,12 @@ export default function EventDetail() {
     setIsLoaded(true);
   }, []);
 
-  const [showToast, setShowToast] = useState(false);
+  // const [showToast, setShowToast] = useState(false);
 
-  const handleRegisterClick = () => {
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 3000); // Hide after 3 seconds
-  };
+  // const handleRegisterClick = () => {
+  //   setShowToast(true);
+  //   setTimeout(() => setShowToast(false), 3000); // Hide after 3 seconds
+  // };
 
   const { activities } = useContext(eventsDataContext);
 
@@ -188,16 +190,24 @@ export default function EventDetail() {
                 </p>
               </div>
             </div>
-            {/* <Link href={`/events/${category}/${title}/register`} passHref> */}
-            <button
-              // onClick={() => setIsModalOpen(true)}
-              onClick={handleRegisterClick}
-              className="group w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-lg mt-8 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-red-900/30 relative overflow-hidden cursor-pointer"
-            >
-              <span className="relative z-10">Register Now</span>
-              <span className="absolute inset-0 bg-gradient-to-r from-red-500 to-red-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-            </button>
-            {/* </Link> */}
+            <Link href={`/events/${category}/${title}/register`} passHref>
+              <button
+                // onClick={handleRegisterClick}
+                disabled={userData ? false : true}
+                className={`group w-full ${
+                  userData
+                    ? "bg-red-600 hover:bg-red-700"
+                    : "bg-gray-700 hover:bg-gray-600"
+                } text-white font-bold py-4 px-8 rounded-lg mt-8 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-red-900/30 relative overflow-hidden cursor-pointer`}
+              >
+                <span className="relative z-10">Register Now</span>
+                <span
+                  className={`absolute inset-0 bg-gradient-to-r ${
+                    userData ? "from-red-500 to-red-700" : ""
+                  } opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                ></span>
+              </button>
+            </Link>
           </div>
         </div>
 
@@ -272,35 +282,9 @@ export default function EventDetail() {
               <p className="text-gray-300 text-lg">{activity.prizes}</p>
             </div>
           </div>
-
-          {/* Rules */}
-          {/* <div
-            className={`pb-12 transition-all duration-700 delay-750 transform ${
-              isLoaded
-                ? "translate-y-0 opacity-100"
-                : "translate-y-20 opacity-0"
-            }`}
-          >
-            <h2 className="text-2xl font-bold mb-6 text-red-500 flex items-center">
-              <span className="w-8 h-px bg-red-500 mr-3"></span>
-              Note
-            </h2>
-            <ul className="text-gray-300 space-y-4">
-              {activity.notes.map((rule, index) => (
-                <li key={index} className="flex items-start group">
-                  <span className="bg-gray-800 text-red-500 rounded-full h-6 w-6 flex items-center justify-center mr-4 mt-1 font-bold text-sm group-hover:bg-red-600 group-hover:text-white transition-colors duration-300">
-                    {index + 1}
-                  </span>
-                  <span className="text-lg leading-relaxed group-hover:text-white transition-colors duration-300">
-                    {rule}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div> */}
         </div>
         {/* Toast Notification */}
-        {showToast && (
+        {/* {showToast && (
           <div
             id="toast-default"
             className="fixed bottom-5 right-5 z-[100] flex items-center max-w-xs p-4 text-white bg-gray-900 rounded-lg shadow-lg animate-slide-in"
@@ -313,7 +297,7 @@ export default function EventDetail() {
               Registration opening very soon...
             </div>
           </div>
-        )}
+        )} */}
       </div>
       <style jsx>{`
         @keyframes slide-in {

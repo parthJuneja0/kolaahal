@@ -1,5 +1,5 @@
 "use client"
-import { createContext } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import biotoon from "@/assets/technical/biotoon.jpg";
 import techRelay from "@/assets/technical/tech_relay.jpg";
 import pythonCodingChallenge from "@/assets/technical/python_coding_challenge.jpg";
@@ -27,6 +27,9 @@ import extempore from "@/assets/management/extempore.jpg";
 import businessPlan from "@/assets/management/business_plan.jpg";
 import businessQuiz from "@/assets/management/business_quiz.jpg";
 import collageMaking from "@/assets/management/collage_making.jpg";
+import momentsOfTheDay from "@/assets/creativity/moments_of_the_day.jpg";
+// import { onValue, ref } from 'firebase/database';
+// import { db } from '../../firebase.config';
 
 export const eventsDataContext = createContext();
 export const EventsDataProvider = ({ children }) => {
@@ -133,7 +136,7 @@ export const EventsDataProvider = ({ children }) => {
                 OCContact: "7037386808",
                 EC: "Kartikey Sharma",
                 ECContact: "8864997581",
-                fees: 100,
+                fees: 80,
             },
             {
                 title: "Drone Race",
@@ -257,7 +260,7 @@ export const EventsDataProvider = ({ children }) => {
                 fees: 200,
             },
             {
-                title: "Rangmanch - Skit/Nukkad Natak",
+                title: "Rangmanch - Skit and Nukkad Natak",
                 description: "Rangmanch – Where stories come alive! Raise your voice, ignite emotions, and let the stage be your canvas. Whether it's a powerful skit or a gripping nukkad natak, captivate the audience and make an impact that lasts!",
                 image: rangmanch,
                 date: "28 March 2025",
@@ -375,6 +378,23 @@ export const EventsDataProvider = ({ children }) => {
                 EC: "Stuti Kumar",
                 ECContact: "7906274257",
                 fees: 150,
+            },
+            {
+                title: "Moments of the day",
+                description:
+                    "Capture the perfect moment! A themed photography challenge where participants compete to capture the best shot of the day.",
+                image: momentsOfTheDay,
+                date: "26 March 2025 - 28 March 2025",
+                time: "10:00 AM - 4:00 PM",
+                venue: "College Campus",
+                teamSize: "1",
+                prizes: "Winner: 500, 1st Runner-up: 500, 2nd Runner-up: 500",
+                evaluationScheme: "Best Clicks of the Day, Creativity, Overall Impact",
+                OC: "Kashish Sharma",
+                OCContact: "9258817121",
+                EC: "Vanshika Vanshishth",
+                ECContact: "7060078507",
+                fees: 50,
             },
             {
                 title: "Blindfold Makeup",
@@ -499,6 +519,28 @@ export const EventsDataProvider = ({ children }) => {
             },
         ],
     };
+
+    // const [activities, setActivities] = useState([]);
+
+    // useEffect(() => {
+    //     const activitiesRef = ref(db, "/activities");
+
+    //     // Listen for data changes
+    //     onValue(activitiesRef, (snapshot) => {
+    //         if (snapshot.exists()) {
+    //             setActivities(snapshot.val()); // Convert object to array
+    //         } else {
+    //             setActivities([]);
+    //         }
+    //     });
+
+    //     return () => { }; // Cleanup if needed
+    // }, []);
+
+    // useEffect(() => {
+    //     if (!activities) return;
+    //     console.log(activities)
+    // }, [activities])
 
     return (
         <eventsDataContext.Provider value={{ activities }}>

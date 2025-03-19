@@ -1,8 +1,8 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 import { Uncial_Antiqua, Nanum_Gothic } from "next/font/google";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { db } from "../../../../../../firebase.config";
 import {
   equalTo,
@@ -12,6 +12,9 @@ import {
   query,
   ref,
 } from "firebase/database";
+import kolaahal from "@/assets/kolaahal.png";
+import Image from "next/image";
+import { userContext } from "@/context/userContext";
 
 const uncialAntiqua = Uncial_Antiqua({ subsets: ["latin"], weight: ["400"] });
 const nanumGothic = Nanum_Gothic({ subsets: ["latin"], weight: ["400"] });
@@ -94,7 +97,9 @@ const AnimatedSparkles = () => {
 };
 
 export default function RegistrationForm() {
+  const router = useRouter();
   const params = useParams();
+  const { userData } = useContext(userContext);
   const { category, title } = params;
   const [error, setError] = useState("");
   const [formData, setFormData] = useState({
@@ -104,7 +109,7 @@ export default function RegistrationForm() {
     branch: "",
     year: "",
     contactNo: "",
-    email: "",
+    // email: "",
   });
 
   const [formFocus, setFormFocus] = useState({
@@ -114,7 +119,7 @@ export default function RegistrationForm() {
     branch: false,
     year: false,
     contactNo: false,
-    email: false,
+    // email: false,
   });
 
   // Track if we're in the browser
@@ -124,6 +129,10 @@ export default function RegistrationForm() {
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  useEffect(() => {
+    if (!userData) router.push("/signin");
+  }, [userData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -151,17 +160,15 @@ export default function RegistrationForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.email) {
-      setError("Email is required.");
-      return;
-    }
-
     try {
-      const formRef = ref(db, "submissions");
+      const formRef = ref(
+        db,
+        `submissions/${category}/${decodeURIComponent(title)}`
+      );
       const emailQuery = query(
         formRef,
         orderByChild("email"),
-        equalTo(formData.email)
+        equalTo(userData.email)
       );
 
       const snapshot = await get(emailQuery);
@@ -169,7 +176,7 @@ export default function RegistrationForm() {
       if (snapshot.exists()) {
         setError("You have already registered for this event.");
       } else {
-        await push(formRef, formData);
+        await push(formRef, { ...formData, email: userData.email });
         console.log("Form submitted successfully:", formData);
         setFormData({ name: "", email: "" }); // Reset form on success
       }
@@ -229,88 +236,7 @@ export default function RegistrationForm() {
 
       <div className="w-full max-w-5xl flex flex-col md:flex-row rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(255,0,0,0.2)] bg-gradient-to-br from-gray-900 to-black relative z-10 border border-gray-800">
         {/* Left Panel - Decorative */}
-        <div className="md:w-2/5 p-10 relative overflow-hidden bg-[#0e0e0e]">
-          <div className="absolute inset-0">
-            <div
-              className="absolute -top-20 -left-20 w-40 h-40 bg-red-600 rounded-full opacity-10 blur-3xl animate-pulse"
-              style={{ animationDuration: "8s" }}
-            ></div>
-            <div
-              className="absolute -bottom-20 -right-20 w-40 h-40 bg-red-800 rounded-full opacity-10 blur-3xl animate-pulse"
-              style={{ animationDuration: "12s", animationDelay: "2s" }}
-            ></div>
-            <div className="absolute inset-0 bg-gradient-to-br from-transparent via-black/50 to-black"></div>
-            <div className="absolute inset-0 bg-[url('/noise.png')] opacity-5 mix-blend-overlay"></div>
-          </div>
-
-          {/* Animated sparkles - only render on client */}
-          {isClient && (
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <AnimatedSparkles />
-            </div>
-          )}
-
-          <div className="relative z-10 h-full flex flex-col justify-between">
-            <div className="space-y-6">
-              <div className="inline-block relative">
-                <h1
-                  className={`text-4xl ${uncialAntiqua.className} font-extrabold text-white`}
-                >
-                  Kolaahal<span className="text-red-500">2025</span>
-                </h1>
-                <div
-                  className="h-1 w-16 bg-gradient-to-r from-red-500 to-red-700 mt-2 animate-pulse"
-                  style={{ animationDuration: "3s" }}
-                ></div>
-              </div>
-
-              <div className="pt-6 space-y-4">
-                {[
-                  { icon: "🎓", text: "Exposure" },
-                  { icon: "💼", text: "Networking" },
-                  { icon: "🚀", text: "enjoyment" },
-                ].map((item, i) => (
-                  <div
-                    key={i}
-                    className="flex items-center space-x-3 hover:translate-x-1 transition-transform duration-300"
-                  >
-                    <div
-                      className="w-8 h-8 rounded-full bg-gradient-to-br from-red-500/20 to-red-700/20 flex items-center justify-center text-white animate-pulse"
-                      style={{ animationDuration: `${3 + i * 0.5}s` }}
-                    >
-                      {item.icon}
-                    </div>
-                    <p className="text-gray-300">{item.text}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="hidden md:block">
-              <div className="space-y-8 mt-12">
-                <div className="space-y-5">
-                  {[1, 2, 3].map((i) => (
-                    <div key={i} className="flex items-center space-x-3">
-                      <div
-                        className="w-2 h-2 rounded-full bg-red-500 animate-pulse"
-                        style={{ animationDuration: `${2 + i}s` }}
-                      ></div>
-                      <div className="h-0.5 flex-1 bg-gray-800 relative overflow-hidden">
-                        <div
-                          className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-red-500/30 to-transparent animate-slide-right"
-                          style={{
-                            animationDuration: `${7 + i * 2}s`,
-                            animationIterationCount: "infinite",
-                          }}
-                        ></div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Image src={kolaahal} alt="Kolaahal" className="w-96" />
 
         {/* Right Panel - Form */}
         <div className="md:w-3/5 p-10 relative">
@@ -328,7 +254,7 @@ export default function RegistrationForm() {
           <div className="relative z-10">
             <h2 className="text-3xl font-bold mb-2 flex items-center">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-400 to-red-600">
-                Registration
+                {decodeURIComponent(title)}
               </span>
               <div className="ml-4 flex-1 h-px bg-gradient-to-r from-red-700 to-transparent relative overflow-hidden">
                 <div
@@ -375,7 +301,7 @@ export default function RegistrationForm() {
                     id: "contactNo",
                     label: "Contact No.",
                     type: "tel",
-                    placeholder: "+1 (123) 456-7890",
+                    placeholder: "+91 1234567890",
                   },
                 ].map((field) => (
                   <div key={field.id} className="space-y-1 group">
@@ -460,7 +386,8 @@ export default function RegistrationForm() {
                   </div>
                 </div>
 
-                <div className="space-y-1 md:col-span-2 group">
+                {/* Email */}
+                {/* <div className="space-y-1 md:col-span-2 group">
                   <label
                     htmlFor="email"
                     className={`text-sm font-medium transition-colors duration-300 ${
@@ -488,7 +415,7 @@ export default function RegistrationForm() {
                       }`}
                     ></div>
                   </div>
-                </div>
+                </div> */}
               </div>
 
               <div className="pt-6">

@@ -1,12 +1,14 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Uncial_Antiqua } from "next/font/google";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { LuCircleAlert } from "react-icons/lu";
+import { userContext } from "@/context/userContext";
 const uncialAntiqua = Uncial_Antiqua({ subsets: ["latin"], weight: ["400"] });
 
 const HeroSection = () => {
+  const { userData } = useContext(userContext);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [particles, setParticles] = useState([]);
 
@@ -52,13 +54,14 @@ const HeroSection = () => {
       </div>
 
       {/* Top-right buttons */}
-      {/* <Link href="/signup">
-          <button className="px-6 py-2 bg-red-600 text-white rounded-full">
-            Sign Up
-          </button>
-        </Link> */}
-      {/* Top-right buttons */}
       <div className="absolute top-4 right-4 z-50 flex space-x-4">
+        {!userData && (
+          <Link href="/signin">
+            <button className="lg:px-6 lg:py-2 px-3 py-1 bg-red-600 text-white rounded-full cursor-pointer hover:scale-105 transition-transform duration-300">
+              Sign In
+            </button>
+          </Link>
+        )}
         <button
           onClick={handleRegisterClick}
           className="lg:px-6 lg:py-2 px-3 py-1 bg-white/10 backdrop-blur text-white rounded-full border-red-300 border cursor-pointer hover:scale-105 transition-transform duration-300"
@@ -144,7 +147,7 @@ const HeroSection = () => {
               }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="mt-8 md:mt-12 px-6 sm:px-8 py-2 sm:py-3 bg-gradient-to-r from-red-600 to-pink-600 rounded-full text-base sm:text-lg font-medium hover:shadow-glow transition-all duration-300"
+              className="mt-8 md:mt-12 px-6 sm:px-8 py-2 sm:py-3 bg-gradient-to-r from-red-600 to-pink-600 rounded-full text-base sm:text-lg font-medium hover:shadow-glow transition-all duration-300 cursor-pointer hover:scale-105"
             >
               Explore Events
             </motion.button>
