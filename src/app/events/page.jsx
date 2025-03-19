@@ -48,8 +48,16 @@ export default function Events() {
       {/* Hero Section */}
       <div className="relative h-[40vh] md:h-[50vh]">
         <div className="absolute top-4 right-4 z-50 flex space-x-4">
-          <img src="/assets/miet.png" alt="Logo 1" className="lg:h-12 h-8" />
-          <img src="/assets/image.png" alt="Logo 2" className="lg:h-12 h-8" />
+          <img
+            src="/assets/miet.png"
+            alt="Logo 1"
+            className="logo lg:h-12 md:h-10 sm:h-8 h-6"
+          />
+          <img
+            src="/assets/image.png"
+            alt="Logo 2"
+            className="logo lg:h-12 md:h-10 sm:h-8 h-6"
+          />
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-red-900/30 to-black z-0">
           {/* Pattern overlay */}
@@ -57,7 +65,7 @@ export default function Events() {
             className="absolute inset-0 opacity-10"
             style={{
               backgroundImage:
-                "url(\"data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='1' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='1'/%3E%3Ccircle cx='13' cy='13' r='1'/%3E%3C/g%3E%3C/svg%3E\")",
+                'url("data:image/svg+xml,%3Csvg width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\' fill-rule=\'evenodd\'%3E%3Ccircle cx=\'3\' cy=\'3\' r=\'1\'/%3E%3Ccircle cx=\'13\' cy=\'13\' r=\'1\'/%3E%3C/g%3E%3C/svg%3E")',
               backgroundSize: "15px 15px",
             }}
           ></div>
@@ -78,7 +86,7 @@ export default function Events() {
               ))}
             </div>
 
-            {/* Character-by-character reveal for EVENTS (same animation as CAMPUS) */}
+            {/* Character-by-character reveal for EVENTS */}
             <div className="inline-block ml-2">
               {" EVENTS".split("").map((char, index) => (
                 <span
@@ -120,14 +128,10 @@ export default function Events() {
                     key={category.id}
                     onClick={() => setActiveTab(category.id)}
                     className={`
-                  group relative m-1 px-3 py-2 md:px-8 md:py-3 overflow-hidden
-                  text-sm md:text-base
-                  ${
-                    activeTab === category.id
-                      ? "text-white"
-                      : "text-gray-400 hover:text-white"
-                  }
-                `}
+                      group relative m-1 px-3 py-2 md:px-8 md:py-3 overflow-hidden
+                      text-sm md:text-base
+                      ${activeTab === category.id ? "text-white" : "text-gray-400 hover:text-white"}
+                    `}
                   >
                     {/* Hexagonal background for active state */}
                     {activeTab === category.id && (
@@ -145,9 +149,7 @@ export default function Events() {
                     {/* Bottom accent line */}
                     <div
                       className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 h-0.5 bg-red-600 transition-all duration-300 ${
-                        activeTab === category.id
-                          ? "w-full"
-                          : "w-0 group-hover:w-2/3"
+                        activeTab === category.id ? "w-full" : "w-0 group-hover:w-2/3"
                       }`}
                     ></div>
                   </button>
@@ -169,9 +171,7 @@ export default function Events() {
               >
                 <div
                   className={`group bg-gray-900 rounded-xl overflow-hidden shadow-xl ${
-                    animateCards
-                      ? "opacity-100 translate-y-0"
-                      : "opacity-0 translate-y-10"
+                    animateCards ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                   } transition-all duration-500`}
                   style={{ transitionDelay: `${index * 75}ms` }}
                 >
@@ -233,8 +233,13 @@ export default function Events() {
         </div>
       </footer>
 
-      {/* Add custom styles */}
+      {/* Custom global styles for logo responsiveness */}
       <style jsx global>{`
+        @media (max-width: 667px) {
+          .logo {
+            height: 1.25rem !important;
+          }
+        }
         .clip-hexagon {
           clip-path: polygon(
             10% 0%,

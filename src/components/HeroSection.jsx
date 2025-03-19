@@ -3,7 +3,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { Uncial_Antiqua } from "next/font/google";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { LuCircleAlert } from "react-icons/lu";
 import { userContext } from "@/context/userContext";
 const uncialAntiqua = Uncial_Antiqua({ subsets: ["latin"], weight: ["400"] });
 
@@ -38,22 +37,29 @@ const HeroSection = () => {
     }
   }, []);
 
-  const [showToast, setShowToast] = useState(false);
-
-  const handleRegisterClick = () => {
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 3000); // Hide after 3 seconds
-  };
+  // const [showToast, setShowToast] = useState(false);
+  // const handleRegisterClick = () => {
+  //   setShowToast(true);
+  //   setTimeout(() => setShowToast(false), 3000); // Hide after 3 seconds
+  // };
 
   return (
     <div className="relative w-full min-h-screen overflow-hidden bg-black">
       {/* Top-left logos */}
       <div className="absolute top-4 left-4 z-50 flex space-x-4">
-        <img src="/assets/miet.png" alt="Logo 1" className="lg:h-12 h-8" />
-        <img src="/assets/image.png" alt="Logo 2" className="lg:h-12 h-8" />
+        <img
+          src="/assets/miet.png"
+          alt="Logo 1"
+          className="lg:h-12 md:h-10 sm:h-8 h-6"
+        />
+        <img
+          src="/assets/image.png"
+          alt="Logo 2"
+          className="lg:h-12 md:h-10 sm:h-8 h-6"
+        />
       </div>
 
-      {/* Top-right buttons */}
+      {/* Top-right Sign In */}
       <div className="absolute top-4 right-4 z-50 flex space-x-4">
         {!userData && (
           <Link href="/signin">
@@ -62,15 +68,10 @@ const HeroSection = () => {
             </button>
           </Link>
         )}
-        <button
-          onClick={handleRegisterClick}
-          className="lg:px-6 lg:py-2 px-3 py-1 bg-white/10 backdrop-blur text-white rounded-full border-red-300 border cursor-pointer hover:scale-105 transition-transform duration-300"
-        >
-          Register Now
-        </button>
       </div>
 
-      {/* Toast Notification */}
+      {/* Uncomment below block to enable Toast Notification */}
+      {/*
       {showToast && (
         <div
           id="toast-default"
@@ -85,6 +86,7 @@ const HeroSection = () => {
           </div>
         </div>
       )}
+      */}
 
       {/* Main content */}
       <div className="relative w-full h-screen">
@@ -135,23 +137,46 @@ const HeroSection = () => {
             </p>
           </motion.div>
 
-          {/* Animated button */}
-          <Link href="/events">
-            <motion.button
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{
-                delay: 1.1,
-                duration: 0.5,
-                type: "spring",
-              }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="mt-8 md:mt-12 px-6 sm:px-8 py-2 sm:py-3 bg-gradient-to-r from-red-600 to-pink-600 rounded-full text-base sm:text-lg font-medium hover:shadow-glow transition-all duration-300 cursor-pointer hover:scale-105"
+          {/* Buttons Container */}
+          <div className="mt-8 md:mt-12 flex flex-col sm:flex-row items-center gap-4">
+            <Link href="/events">
+              <motion.button
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{
+                  delay: 1.1,
+                  duration: 0.5,
+                  type: "spring",
+                }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-6 sm:px-8 py-2 sm:py-3 bg-gradient-to-r from-red-600 to-pink-600 rounded-full text-base sm:text-lg font-medium hover:shadow-glow transition-all duration-300 cursor-pointer hover:scale-105"
+              >
+              Events Register
+              </motion.button>
+            </Link>
+            <Link
+              href="https://linktr.ee/intelliasociety"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Explore Events
-            </motion.button>
-          </Link>
+              <motion.button
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{
+                  delay: 1.1,
+                  duration: 0.5,
+                  type: "spring",
+                }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                // onClick={handleRegisterClick}
+                className="px-6 sm:px-8 py-2 sm:py-3 bg-white/10 backdrop-blur text-white rounded-full border-red-300 border cursor-pointer hover:scale-105 transition-all duration-300"
+              >
+                Register Now
+              </motion.button>
+            </Link>
+          </div>
         </div>
 
         {/* Animated particles */}

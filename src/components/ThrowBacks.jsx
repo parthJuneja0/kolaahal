@@ -8,11 +8,12 @@ const nanumGothic = Nanum_Gothic({ subsets: ["latin"], weight: ["400"] });
 
 
 const images = [
-  "/assets/img1.jpg",
-  "/assets/img2.jpg",
-  "/assets/img3.jpg",
-  "/assets/img4.jpg",
-  "/assets/img5.jpg"
+  "/assets/throwback/1.jpg",
+  "/assets/throwback/2.jpg",
+  "/assets/throwback/3.jpg",
+  "/assets/throwback/4.jpg",
+  "/assets/throwback/5.jpg",
+  "/assets/throwback/6.jpg"
 ];
 
 // Custom hook to update a container's image index with a staggered delay
@@ -188,7 +189,7 @@ const ThrowbackSection = () => {
                 </AnimatePresence>
                 <div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
                 <h3 className="z-10 text-2xl font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-3xl">
-                  Wines
+                  
                 </h3>
               </a>
             </div>
@@ -210,7 +211,7 @@ const ThrowbackSection = () => {
                 </AnimatePresence>
                 <div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
                 <h3 className="z-10 text-2xl font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-3xl">
-                  Gin
+                
                 </h3>
               </a>
               
@@ -231,7 +232,7 @@ const ThrowbackSection = () => {
                   </AnimatePresence>
                   <div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
                   <h3 className="z-10 text-2xl font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-3xl">
-                    Whiskey
+                    
                   </h3>
                 </a>
 
@@ -251,7 +252,7 @@ const ThrowbackSection = () => {
                   </AnimatePresence>
                   <div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
                   <h3 className="z-10 text-2xl font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-3xl">
-                    Vodka
+                    
                   </h3>
                 </a>
               </div>
@@ -274,7 +275,7 @@ const ThrowbackSection = () => {
                 </AnimatePresence>
                 <div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
                 <h3 className="z-10 text-2xl font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-3xl">
-                  Brandy
+                  
                 </h3>
               </a>
             </div>
