@@ -178,32 +178,45 @@ export default function EventDetail() {
                 </p>
               </div>
             </div>
-            <Link
-              href={
-                !userData ? `/signin` : `/events/${category}/${title}/register`
-              }
-              passHref
-            >
-              <button
-                onClick={() => {
-                  handleClick();
-                }}
-                disabled={userData?.activityCount >= 3}
-                className={`group w-full ${
-                  !userData || userData?.activityCount >= 3
-                    ? "bg-gray-700 cursor-not-allowed hover:bg-gray-600"
-                    : "bg-red-600 hover:bg-red-700"
-                } text-white font-bold py-4 px-8 rounded-lg mt-8 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-red-900/30 relative overflow-hidden cursor-pointer`}
+            {activity.title === "Foxtrot Solo - Day 1" ||
+            activity.title === "Foxtrot Duet - Day 2" ||
+            activity.title === "Foxtrot Group - Day 2" ||
+            activity.title === "Swar Sangam Solo" ||
+            activity.title === "Swar Sangam Duet" ||
+            activity.title === "Swar Sangam Group" ||
+            activity.title === "Xtacy - The Fashion Show" ||
+            activity.title === "Rangmanch - Skit and Nukkad Natak" ? (
+              <div className="text-sm text-red-500">Auditions are currently underway.</div>
+            ) : (
+              <Link
+                href={
+                  !userData
+                    ? `/signin`
+                    : `/events/${category}/${title}/register`
+                }
+                passHref
               >
-                <span className="relative z-10">
-                  {!userData
-                    ? "Sign In to Register"
-                    : userData?.activityCount >= 3
-                    ? "Limit Reached"
-                    : "Register Now"}
-                </span>
-              </button>
-            </Link>
+                <button
+                  onClick={() => {
+                    handleClick();
+                  }}
+                  disabled={userData?.activityCount >= 3}
+                  className={`group w-full ${
+                    !userData || userData?.activityCount >= 3
+                      ? "bg-gray-700 cursor-not-allowed hover:bg-gray-600"
+                      : "bg-red-600 hover:bg-red-700"
+                  } text-white font-bold py-4 px-8 rounded-lg mt-8 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-red-900/30 relative overflow-hidden cursor-pointer`}
+                >
+                  <span className="relative z-10">
+                    {!userData
+                      ? "Sign In to Register"
+                      : userData?.activityCount >= 3
+                      ? "Limit Reached"
+                      : "Register Now"}
+                  </span>
+                </button>
+              </Link>
+            )}
           </div>
         </div>
 
