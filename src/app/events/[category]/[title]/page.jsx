@@ -1,5 +1,5 @@
 "use client";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Head from "next/head";
 import Link from "next/link";
 import { useState, useEffect, useContext } from "react";
@@ -18,6 +18,7 @@ import { LuCircleAlert } from "react-icons/lu";
 import { userContext } from "@/context/userContext";
 
 export default function EventDetail() {
+  const router = useRouter();
   const { userData } = useContext(userContext);
   const params = useParams();
   const { category, title } = params;
@@ -27,12 +28,11 @@ export default function EventDetail() {
     setIsLoaded(true);
   }, []);
 
-  // const [showToast, setShowToast] = useState(false);
-
-  // const handleRegisterClick = () => {
-  //   setShowToast(true);
-  //   setTimeout(() => setShowToast(false), 3000); // Hide after 3 seconds
-  // };
+  const handleClick = () => {
+    if (!userData) {
+      router.push("/signin");
+    }
+  };
 
   const { activities } = useContext(eventsDataContext);
 
@@ -178,12 +178,17 @@ export default function EventDetail() {
                 </p>
               </div>
             </div>
-            <Link href={`/events/${category}/${title}/register`} passHref>
+            <Link
+              href={
+                !userData ? `/signin` : `/events/${category}/${title}/register`
+              }
+              passHref
+            >
               <button
-                // onClick={() => {
-                //   handleRegisterClick();
-                // }}
-                disabled={!userData || userData?.activityCount >= 3}
+                onClick={() => {
+                  handleClick();
+                }}
+                disabled={userData?.activityCount >= 3}
                 className={`group w-full ${
                   !userData || userData?.activityCount >= 3
                     ? "bg-gray-700 cursor-not-allowed hover:bg-gray-600"
@@ -192,7 +197,7 @@ export default function EventDetail() {
               >
                 <span className="relative z-10">
                   {!userData
-                    ? "Login to Register"
+                    ? "Sign In to Register"
                     : userData?.activityCount >= 3
                     ? "Limit Reached"
                     : "Register Now"}
@@ -274,21 +279,6 @@ export default function EventDetail() {
             </div>
           </div>
         </div>
-        {/* Toast Notification */}
-        {/* {showToast && (
-          <div
-            id="toast-default"
-            className="fixed bottom-5 right-5 z-[100] flex items-center max-w-xs p-4 text-white bg-gray-900 rounded-lg shadow-lg animate-slide-in"
-            role="alert"
-          >
-            <div className="inline-flex items-center justify-center w-8 h-8 text-blue-500 bg-blue-100 rounded-lg">
-              <LuCircleAlert />
-            </div>
-            <div className="ml-3 text-sm font-medium">
-              Registration opening very soon...
-            </div>
-          </div>
-        )} */}
       </div>
       <style jsx>{`
         @keyframes slide-in {

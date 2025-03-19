@@ -15,6 +15,7 @@ import {
 } from "firebase/database";
 import Image from "next/image";
 import { userContext } from "@/context/userContext";
+import { TiTick } from "react-icons/ti";
 
 const uncialAntiqua = Uncial_Antiqua({ subsets: ["latin"], weight: ["400"] });
 const nanumGothic = Nanum_Gothic({ subsets: ["latin"], weight: ["400"] });
@@ -128,6 +129,8 @@ export default function RegistrationForm() {
     setIsClient(true);
   }, []);
 
+  const [showToast, setShowToast] = useState(false);
+
   useEffect(() => {
     if (!userData) router.push("/signin");
   }, [userData]);
@@ -164,6 +167,11 @@ export default function RegistrationForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!userData) {
+      router.push("/signin");
+      return;
+    }
 
     if (userData?.activityCount >= 3) {
       setError(
@@ -219,6 +227,9 @@ export default function RegistrationForm() {
         });
 
         console.log("Activity count updated for user:", userId);
+
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 3000); // Hide after 3 seconds
       } else {
         console.error("User not found with email:", userData.email);
       }
@@ -240,6 +251,21 @@ export default function RegistrationForm() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-black to-gray-900 flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Toast Notification */}
+      {showToast && (
+        <div
+          id="toast-default"
+          className="fixed bottom-5 right-5 z-[100] flex items-center max-w-xs p-4 text-white bg-gray-900 rounded-lg shadow-lg animate-slide-in"
+          role="alert"
+        >
+          <div className="inline-flex items-center justify-center w-8 h-8 text-blue-500 bg-blue-100 rounded-lg">
+            <TiTick />
+          </div>
+          <div className="ml-3 text-sm font-medium">
+            You have successfully registered for the event.
+          </div>
+        </div>
+      )}
       {/* Animated floating particles - only render on client */}
       {isClient && (
         <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
@@ -450,6 +476,7 @@ export default function RegistrationForm() {
               <div className="pt-6">
                 <button
                   type="submit"
+                  // onClick={handleClick}
                   disabled={!userData || userData?.activityCount >= 3}
                   className={`w-full font-bold py-4 px-6 rounded-lg transition duration-300 transform focus:outline-none focus:ring-2 shadow-lg relative overflow-hidden group 
     ${
@@ -460,7 +487,7 @@ export default function RegistrationForm() {
                 >
                   <span className="relative z-10">
                     {!userData
-                      ? "Login to Register"
+                      ? "Sign In to Register"
                       : userData?.activityCount >= 3
                       ? "Limit Reached"
                       : "Submit"}
