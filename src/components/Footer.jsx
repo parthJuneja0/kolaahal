@@ -1,40 +1,40 @@
-'use client'
-import React, { useState, useEffect } from 'react'
-import { Nanum_Gothic } from 'next/font/google'
-import { motion } from 'framer-motion'
-import { Instagram, Mail } from 'lucide-react'
+"use client";
+import React, { useState, useEffect } from "react";
+import { Nanum_Gothic } from "next/font/google";
+import { motion } from "framer-motion";
+import { Instagram, Mail } from "lucide-react";
 
-const nanumGothic = Nanum_Gothic({ subsets: ['latin'], weight: ['400'] })
+const nanumGothic = Nanum_Gothic({ subsets: ["latin"], weight: ["400"] });
 
 const socialIcons = [
   {
     icon: <Instagram size={24} />,
-    label: 'Instagram',
-    link: 'https://www.instagram.com/kolaahal_miet?igsh=eThyNzM1Zm5hM3hp',
+    label: "Instagram",
+    link: "https://www.instagram.com/kolaahal_miet?igsh=eThyNzM1Zm5hM3hp",
   },
   {
     icon: <Mail size={24} />,
-    label: 'Email',
-    link: 'mailto:contact@kolaahal.com',
+    label: "Email",
+    link: "mailto:contact@kolaahal.com",
   },
-]
+];
 
 export default function Footer() {
-  const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      const section = document.getElementById('throwback-section')
-      if (!section) return
-      const sectionPosition = section.getBoundingClientRect()
-      const visible = sectionPosition.top < window.innerHeight * 0.75
-      setIsVisible(visible)
-    }
+      const section = document.getElementById("throwback-section");
+      if (!section) return;
+      const sectionPosition = section.getBoundingClientRect();
+      const visible = sectionPosition.top < window.innerHeight * 0.75;
+      setIsVisible(visible);
+    };
 
-    window.addEventListener('scroll', handleScroll)
-    handleScroll()
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <footer className="bg-amber-100 text-black py-6">
@@ -55,7 +55,9 @@ export default function Footer() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-center text-gray-700"
             >
-              <p className="text-base">for enquery contract Parth Juneja number 90847 74537</p>
+              <a href="tel:9084774537" className="text-base">
+                For enquiry: 📞 90847 74537
+              </a>
             </motion.div>
           </div>
 
@@ -84,5 +86,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }
