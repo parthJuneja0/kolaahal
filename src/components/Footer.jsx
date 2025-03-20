@@ -55,7 +55,7 @@ export default function Footer() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-center text-gray-700"
             >
-              <p className="text-base">Connect with us on social media!</p>
+              <p className="text-base">for enquery contract Parth Juneja number 90847 74537</p>
             </motion.div>
           </div>
 
