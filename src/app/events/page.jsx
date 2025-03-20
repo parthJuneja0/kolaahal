@@ -83,6 +83,10 @@ export default function Events() {
           </div>
         </div>
 
+<<<<<<< Updated upstream
+=======
+        {/* Activity Cards */}
+>>>>>>> Stashed changes
         <div className="grid grid-cols-3 px-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-12">
           {activities && activities[activeTab] && Object.values(activities[activeTab]).map((activity, index) => (
             <Link key={activity.title} href={`/events/${activeTab}/${activity.title}`} passHref>
