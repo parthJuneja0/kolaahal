@@ -466,7 +466,7 @@ export default function RegistrationForm() {
           <div className="relative z-10 flex justify-evenly items-center flex-col h-full">
             <div className="inline-block relative">
               <h1
-                className={`text-4xl ${uncialAntiqua.className} font-extrabold text-white`}
+                className={`text-4xl ${uncialAntiqua.className} font-extrabold text-gray-600`}
               >
                 Kolaahal<span className="text-red-500">2025</span>
               </h1>
@@ -503,7 +503,7 @@ export default function RegistrationForm() {
                           onChange={handleChange}
                           onFocus={() => handleFocus("name")}
                           onBlur={() => handleBlur("name")}
-                          className="w-full px-4 py-3 rounded-lg border border-gray-700 text-white focus:outline-none focus:ring-1 focus:ring-red-500/50 focus:border-red-500/50 transition-all duration-300 placeholder:text-gray-600"
+                          className="w-full px-4 py-3 rounded-lg border bg-gray-800/30 border-gray-700 text-white focus:outline-none focus:ring-1 focus:ring-red-500/50 focus:border-red-500/50 transition-all duration-300 placeholder:text-gray-600"
                           required
                         />
                         <div
