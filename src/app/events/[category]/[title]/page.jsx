@@ -186,7 +186,9 @@ export default function EventDetail() {
             activity.title === "Swar Sangam Group" ||
             activity.title === "Xtacy - The Fashion Show" ||
             activity.title === "Rangmanch - Skit and Nukkad Natak" ? (
-              <div className="text-sm text-red-500">Auditions are currently underway.</div>
+              <div className="text-sm text-red-500">
+                Auditions are currently underway.
+              </div>
             ) : (
               <Link
                 href={
