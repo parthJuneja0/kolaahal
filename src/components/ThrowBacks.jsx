@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 const uncialAntiqua = Uncial_Antiqua({ subsets: ["latin"], weight: ["400"] });
 const nanumGothic = Nanum_Gothic({ subsets: ["latin"], weight: ["400"] });
 
-
 const images = [
   "/assets/throwback/1.jpg",
   "/assets/throwback/2.jpg",
@@ -66,9 +65,9 @@ const ThrowbackSection = () => {
 
   return (
     <section id="throwback-section" className="py-12 relative overflow-hidden">
-      {/* Modern background with animated elements */}
-      <div className="absolute inset-0 bg-gray-700/10 z-0">
-        {/* Animated diagonal stripes */}
+      {/* Main background changed to bg-amber-100 */}
+      <div className="absolute inset-0 z-0 bg-amber-100">
+        {/* Animated diagonal stripes using theme accents */}
         <div className="absolute inset-0">
           {[...Array(5)].map((_, i) => (
             <motion.div
@@ -76,7 +75,7 @@ const ThrowbackSection = () => {
               className="absolute h-full"
               style={{
                 width: '2px',
-                background: `rgba(255, 0, 0, ${0.1 + i * 0.05})`,
+                background: `rgba(254,243,198,${0.1 + i * 0.05})`,
                 left: `${15 + i * 20}%`,
                 transform: 'skewX(-45deg) translateX(-50%)',
               }}
@@ -94,17 +93,18 @@ const ThrowbackSection = () => {
           ))}
         </div>
         
-        {/* Modern geometric shapes */}
+        {/* Geometric shapes with theme borders */}
         <div className="absolute inset-0">
           {[...Array(3)].map((_, i) => (
             <motion.div
               key={`circle-${i}`}
-              className="absolute rounded-full border border-red-600/20"
+              className="absolute rounded-full"
               style={{
                 width: `${200 + i * 100}px`,
                 height: `${200 + i * 100}px`,
                 left: '15%',
                 top: '50%',
+                border: `2px solid rgba(254,243,198,0.2)`
               }}
               animate={{
                 scale: [1, 1.2, 1],
@@ -119,9 +119,10 @@ const ThrowbackSection = () => {
             />
           ))}
           
-          {/* Modern mesh gradient effect */}
+          {/* Mesh gradient effect with the theme color */}
           <motion.div
-            className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-bl from-red-900/10 via-transparent to-transparent"
+            className="absolute right-0 top-0 w-1/2 h-full"
+            style={{ background: "linear-gradient(to-bl, rgba(254,243,198,0.1), transparent)" }}
             animate={{
               opacity: [0.1, 0.3, 0.1],
             }}
@@ -133,11 +134,11 @@ const ThrowbackSection = () => {
           />
         </div>
         
-        {/* Subtle grid overlay */}
+        {/* Subtle grid overlay using theme color */}
         <div 
           className="absolute inset-0" 
           style={{
-            backgroundImage: 'linear-gradient(to right, rgba(255, 0, 0, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 0, 0, 0.05) 1px, transparent 1px)',
+            backgroundImage: 'linear-gradient(to right, rgba(254,243,198,0.15) 1px, transparent 1px), linear-gradient(to bottom, rgba(254,243,198,0.15) 1px, transparent 1px)',
             backgroundSize: '40px 40px',
           }}
         />
@@ -150,25 +151,25 @@ const ThrowbackSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-8"
         >
-          <h2 className={`text-4xl mb-6 text-white ${uncialAntiqua.className} relative inline-block`}>
+          <h2 className={`text-4xl mb-6 text-black ${uncialAntiqua.className} relative inline-block`}>
             Throwbacks
-            {/* Animated modern underline effect */}
+            {/* Animated underline effect */}
             <motion.div 
-              className="absolute left-0 bottom-0 h-0.5 bg-gradient-to-r from-red-400 via-red-600 to-red-400"
+              className="absolute left-0 bottom-0 h-0.5 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-400"
               initial={{ width: "0%" }}
               animate={{ 
                 width: isVisible ? "100%" : "0%",
-                boxShadow: isVisible ? "0 0 10px rgba(239, 68, 68, 0.7)" : "none"
+                boxShadow: isVisible ? "0 0 10px rgba(218,165,32,0.7)" : "none"
               }}
               transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
             />
           </h2>
-          <p className={`text-lg text-gray-300 ${nanumGothic.className}`}>
+          <p className={`text-lg text-gray-700 ${nanumGothic.className}`}>
             Magnificent moments from our previous editions
           </p>
         </motion.div>
 
-        {/* Compact Collage Layout with staggered, distinct image transitions */}
+        {/* Compact Collage Layout with staggered image transitions */}
         <div className="py-4 px-2 mx-auto max-w-screen-xl sm:py-4 lg:px-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 h-full">
           
@@ -187,9 +188,12 @@ const ThrowbackSection = () => {
                     transition={{ duration: 1 }}
                   />
                 </AnimatePresence>
-                <div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
-                <h3 className="z-10 text-2xl font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-3xl">
-                  
+                <div 
+                  className="absolute inset-0" 
+                  style={{ backgroundImage: "linear-gradient(to bottom, rgba(254,243,198,0.25), rgba(254,243,198,0.05))" }}
+                />
+                <h3 className="z-10 text-2xl font-medium text-black absolute top-0 left-0 p-4 xs:text-xl md:text-3xl">
+                  {/* Title if needed */}
                 </h3>
               </a>
             </div>
@@ -209,9 +213,12 @@ const ThrowbackSection = () => {
                     transition={{ duration: 1 }}
                   />
                 </AnimatePresence>
-                <div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
-                <h3 className="z-10 text-2xl font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-3xl">
-                
+                <div 
+                  className="absolute inset-0" 
+                  style={{ backgroundImage: "linear-gradient(to bottom, rgba(254,243,198,0.25), rgba(254,243,198,0.05))" }}
+                />
+                <h3 className="z-10 text-2xl font-medium text-black absolute top-0 left-0 p-4 xs:text-xl md:text-3xl">
+                  {/* Title if needed */}
                 </h3>
               </a>
               
@@ -230,9 +237,12 @@ const ThrowbackSection = () => {
                       transition={{ duration: 1 }}
                     />
                   </AnimatePresence>
-                  <div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
-                  <h3 className="z-10 text-2xl font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-3xl">
-                    
+                  <div 
+                    className="absolute inset-0" 
+                    style={{ backgroundImage: "linear-gradient(to bottom, rgba(254,243,198,0.25), rgba(254,243,198,0.05))" }}
+                  />
+                  <h3 className="z-10 text-2xl font-medium text-black absolute top-0 left-0 p-4 xs:text-xl md:text-3xl">
+                    {/* Title if needed */}
                   </h3>
                 </a>
 
@@ -250,9 +260,12 @@ const ThrowbackSection = () => {
                       transition={{ duration: 1 }}
                     />
                   </AnimatePresence>
-                  <div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
-                  <h3 className="z-10 text-2xl font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-3xl">
-                    
+                  <div 
+                    className="absolute inset-0" 
+                    style={{ backgroundImage: "linear-gradient(to bottom, rgba(254,243,198,0.25), rgba(254,243,198,0.05))" }}
+                  />
+                  <h3 className="z-10 text-2xl font-medium text-black absolute top-0 left-0 p-4 xs:text-xl md:text-3xl">
+                    {/* Title if needed */}
                   </h3>
                 </a>
               </div>
@@ -273,9 +286,12 @@ const ThrowbackSection = () => {
                     transition={{ duration: 1 }}
                   />
                 </AnimatePresence>
-                <div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
-                <h3 className="z-10 text-2xl font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-3xl">
-                  
+                <div 
+                  className="absolute inset-0" 
+                  style={{ backgroundImage: "linear-gradient(to bottom, rgba(254,243,198,0.25), rgba(254,243,198,0.05))" }}
+                />
+                <h3 className="z-10 text-2xl font-medium text-black absolute top-0 left-0 p-4 xs:text-xl md:text-3xl">
+                  {/* Title if needed */}
                 </h3>
               </a>
             </div>
