@@ -46,11 +46,11 @@ export default function Events() {
           <img src="/assets/28th.png" alt="Logo 2" className="logo h-6 sm:h-8 md:h-10 lg:h-14" />
           <img src="/assets/image.png" alt="Logo 3" className="logo h-6 sm:h-8 md:h-10 lg:h-12" />
         </div>
-        <div className="relative z-10 bg-yellow-400/40 lg:h-[10rem]  md:h-[10rem]  h-[8rem] container mx-auto px-4 flex flex-col justify-center items-center text-center">
+        <div className="relative z-10  lg:h-[10rem]  md:h-[10rem]  h-[8rem] container mx-auto px-4 flex flex-col justify-center items-center text-center">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mt-6 lg:-mt-4 md:-mt-4">
             <div className="inline-block">
               {"CAMPUS".split(" ").map((char, index) => (
-                <span key={`campus-${index}`} className="text-white inline-block animate-char-reveal" style={{ animationDelay: `${index * 120}ms` }}>
+                <span key={`campus-${index}`} className="text-gray-500   inline-block animate-char-reveal" style={{ animationDelay: `${index * 120}ms` }}>
                   {char}
                 </span>
               ))}

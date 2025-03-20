@@ -368,13 +368,13 @@ export default function RegistrationForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black to-gray-900 flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen bg-amber-100 flex items-center justify-center p-4 relative overflow-hidden">
       {/* Email Modal */}
       {emailModalOpen && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
           <div className="bg-gray-900 p-8 rounded-lg max-w-md w-full">
             <h2 className="text-2xl font-bold text-white mb-4">Alert ⚠️</h2>
-            <p className="text-gray-400 mb-4">
+            <p className="text-gray-700 mb-4">
               Please use your college email for event participation. Failure to
               do so may affect your winnings.
             </p>
@@ -440,7 +440,7 @@ export default function RegistrationForm() {
         ></div>
       </div>
 
-      <div className="w-full max-w-5xl flex flex-col md:flex-row rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(255,0,0,0.2)] bg-gradient-to-br from-gray-900 to-black relative z-10 border border-gray-800">
+      <div className="w-full max-w-5xl flex flex-col md:flex-row rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(255,0,0,0.2)] bg-amber-100 relative z-10">
         {/* Left Panel - Decorative */}
         <Image
           src={"/assets/kolaahal.png"}
@@ -452,7 +452,7 @@ export default function RegistrationForm() {
 
         {/* Right Panel - Form */}
         <div className="md:w-3/5 p-10 relative">
-          <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-gray-900 via-black to-gray-900 opacity-90"></div>
+          <div className="absolute top-0 right-0 w-full h-full bg-amber-100 opacity-90"></div>
           <div className="absolute inset-0 bg-[url('/noise.png')] opacity-5 mix-blend-overlay"></div>
 
           {/* Subtle animated light effect */}
@@ -488,7 +488,7 @@ export default function RegistrationForm() {
                       <label
                         htmlFor="name"
                         className={`text-sm font-medium transition-colors duration-300 ${
-                          formFocus.name ? "text-red-400" : "text-gray-400"
+                          formFocus.name ? "text-red-400" : "text-gray-700"
                         }`}
                       >
                         Full Name
@@ -503,7 +503,7 @@ export default function RegistrationForm() {
                           onChange={handleChange}
                           onFocus={() => handleFocus("name")}
                           onBlur={() => handleBlur("name")}
-                          className="w-full px-4 py-3 rounded-lg bg-gray-800/30 border border-gray-700 text-white focus:outline-none focus:ring-1 focus:ring-red-500/50 focus:border-red-500/50 transition-all duration-300 placeholder:text-gray-600"
+                          className="w-full px-4 py-3 rounded-lg border border-gray-700 text-white focus:outline-none focus:ring-1 focus:ring-red-500/50 focus:border-red-500/50 transition-all duration-300 placeholder:text-gray-600"
                           required
                         />
                         <div
@@ -518,7 +518,7 @@ export default function RegistrationForm() {
                     <label
                       htmlFor="email"
                       className={`text-sm font-medium transition-colors duration-300 ${
-                        formFocus.email ? "text-red-400" : "text-gray-400"
+                        formFocus.email ? "text-red-400" : "text-gray-700"
                       }`}
                     >
                       College Email ID
@@ -549,7 +549,7 @@ export default function RegistrationForm() {
                     <label
                       htmlFor="password"
                       className={`text-sm font-medium transition-colors duration-300 ${
-                        formFocus.password ? "text-red-400" : "text-gray-400"
+                        formFocus.password ? "text-red-400" : "text-gray-700"
                       }`}
                     >
                       Password
