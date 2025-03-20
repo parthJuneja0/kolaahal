@@ -54,18 +54,13 @@ const HeroSection = () => {
         />
       </div>
 
-      {/* Top-right Sign In and Sign Up */}
+      {/* Top-right Sign In */}
       <div className="absolute top-4 right-4 z-50 flex space-x-4">
         {!userData && (
           <>
-            {/* <Link href="/signin">
-              <button className="lg:px-6 lg:py-2 px-3 py-1 bg-red-600 text-white rounded-full cursor-pointer hover:scale-105 transition-transform duration-300">
-                Sign In
-              </button>
-            </Link> */}
-            <Link href="/signup">
+            <Link href="/signin">
               <button className="lg:px-6 lg:py-2 px-3 py-1 bg-amber-500 text-white rounded-full cursor-pointer hover:scale-105 transition-transform duration-300 hover:shadow-glow">
-                Sign Up
+                Sign In
               </button>
             </Link>
           </>

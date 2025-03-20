@@ -56,7 +56,7 @@ export default function Footer() {
               className="text-center text-gray-700"
             >
               <a href="tel:9084774537" className="text-base">
-                For enquiry: 📞 90847 74537
+                For enquiry: 📞 +91 90847 74537
               </a>
             </motion.div>
           </div>
