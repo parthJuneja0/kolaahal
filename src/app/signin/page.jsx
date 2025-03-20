@@ -372,20 +372,20 @@ export default function RegistrationForm() {
       {/* Email Modal */}
       {emailModalOpen && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
-          <div className="bg-gray-900 p-8 rounded-lg max-w-md w-full">
-            <h2 className="text-2xl font-bold text-white mb-4">Alert ⚠️</h2>
+          <div className="bg-yellow-400 p-8 rounded-lg max-w-md w-full">
+            <h2 className="text-2xl font-bold text-gray-700 mb-4">Alert ⚠️</h2>
             <p className="text-gray-700 mb-4">
               Please use your college email for event participation. Failure to
               do so may affect your winnings.
             </p>
             <button
               onClick={() => toggleEmailModal()}
-              className="bg-transparent text-white font-bold py-2 px-4 rounded-lg transition duration-300 transform hover:translate-y-[-2px] focus:outline-none cursor-pointer ring-1 ring-red-500 focus:ring-opacity-50 mr-4"
+              className="bg-transparent text-gray-700 font-bold py-2 px-4 rounded-lg transition duration-300 transform hover:translate-y-[-2px] focus:outline-none cursor-pointer ring-1 ring-gray-700 focus:ring-opacity-50 mr-4"
             >
               Close
             </button>
             <button
-              className="bg-red-700  hover:bg-red-800 text-white font-bold py-2 px-4 rounded-lg transition duration-300 transform hover:translate-y-[-2px] focus:outline-none cursor-pointer focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
+              className="bg-red-700  hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-lg transition duration-300 transform hover:translate-y-[-2px] focus:outline-none cursor-pointer focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
               onClick={() => handleSignUp()}
             >
               Confirm
@@ -617,7 +617,7 @@ export default function RegistrationForm() {
                 </div>
               </form>
             ) : (
-              <form className="space-y-8 w-full" onSubmit={handleSubmitOTP}>
+              <form className="space-y-8 w-full text-gray-700" onSubmit={handleSubmitOTP}>
                 <p>{message || `Sending OTP to ${formData.email} `}</p>
                 {message && (
                   <p className="text-sm text-red-500">
