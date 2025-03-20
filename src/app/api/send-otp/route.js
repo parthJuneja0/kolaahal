@@ -16,7 +16,7 @@ export async function POST(req) {
     const mailOptions = {
         from: `"Intellia Society" <${process.env.EMAIL}>`,
         to: email,
-        subject: 'Welcome to the MIET Alumni Network!',
+        subject: 'Welcome to the kolaahal 2025!',
         html: `
            <!DOCTYPE html>
 <html lang="en">

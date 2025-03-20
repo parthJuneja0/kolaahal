@@ -75,7 +75,7 @@ export default function EventDetail() {
   const categoryLabel = category.charAt(0).toUpperCase() + category.slice(1);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black to-gray-900 text-white">
+    <div className="min-h-screen bg-amber-100 text-white">
       <Head>
         <title>{activity.title} | Campus Fest</title>
         <meta
@@ -145,8 +145,8 @@ export default function EventDetail() {
             <div className="flex items-start hover:translate-x-1 transition-transform duration-300">
               <Calendar className="h-6 w-6 text-red-500 mr-4 flex-shrink-0 mt-1" />
               <div>
-                <h3 className="text-gray-400 text-sm font-medium">Date</h3>
-                <p className="text-white text-lg font-medium">
+                <h3 className="text-gray-800 text-sm font-medium">Date</h3>
+                <p className="text-gray-800/80 text-lg font-medium">
                   {activity.date}
                 </p>
               </div>
@@ -154,8 +154,8 @@ export default function EventDetail() {
             <div className="flex items-start hover:translate-x-1 transition-transform duration-300">
               <Clock className="h-6 w-6 text-red-500 mr-4 flex-shrink-0 mt-1" />
               <div>
-                <h3 className="text-gray-400 text-sm font-medium">Time</h3>
-                <p className="text-white text-lg font-medium">
+                <h3 className="text-gray-800 text-sm font-medium">Time</h3>
+                <p className="text-gray-800/80  text-lg font-medium">
                   {activity.time}
                 </p>
               </div>
@@ -163,8 +163,8 @@ export default function EventDetail() {
             <div className="flex items-start hover:translate-x-1 transition-transform duration-300">
               <MapPin className="h-6 w-6 text-red-500 mr-4 flex-shrink-0 mt-1" />
               <div>
-                <h3 className="text-gray-400 text-sm font-medium">Venue</h3>
-                <p className="text-white text-lg font-medium">
+                <h3 className="text-gray-800 text-sm font-medium">Venue</h3>
+                <p className="text-gray-800/80  text-lg font-medium">
                   {activity.venue}
                 </p>
               </div>
@@ -172,8 +172,8 @@ export default function EventDetail() {
             <div className="flex items-start hover:translate-x-1 transition-transform duration-300">
               <AiOutlineTeam className="h-6 w-6 text-red-500 mr-4 flex-shrink-0 mt-1" />
               <div>
-                <h3 className="text-gray-400 text-sm font-medium">Team Size</h3>
-                <p className="text-white text-lg font-medium">
+                <h3 className="text-gray-800 text-sm font-medium">Team Size</h3>
+                <p className="text-gray-800/80 text-lg font-medium">
                   {activity.teamSize}
                 </p>
               </div>
@@ -236,7 +236,7 @@ export default function EventDetail() {
               <span className="w-8 h-px bg-red-500 mr-3"></span>
               Description
             </h2>
-            <p className="text-gray-300 text-lg leading-relaxed">
+            <p className="text-gray-800/80  text-lg leading-relaxed">
               {activity.description}
             </p>
           </div>
@@ -253,7 +253,7 @@ export default function EventDetail() {
               <span className="w-8 h-px bg-red-500 mr-3"></span>
               Evaluation Scheme
             </h2>
-            <p className="text-gray-300 text-lg leading-relaxed">
+            <p className="text-gray-800/80  text-lg leading-relaxed">
               {activity.evaluationScheme}
             </p>
           </div>
@@ -270,7 +270,7 @@ export default function EventDetail() {
               <span className="w-8 h-px bg-red-500 mr-3"></span>
               Contact for Enquiry
             </h2>
-            <p className="text-gray-300 text-lg leading-relaxed">
+            <p className="text-gray-800/80  text-lg leading-relaxed">
               {activity.OC} - {activity.OCContact} <br />
               {activity.EC} - {activity.ECContact}
             </p>
