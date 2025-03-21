@@ -118,7 +118,7 @@ const HeroSection = () => {
 
           {/* Buttons Container adjusted to amber theme */}
           <div className="mt-8 md:mt-12 flex flex-col sm:flex-row items-center gap-4">
-            <Link href="/events">
+            {/* <Link href="/events">
               <motion.button
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
@@ -133,7 +133,7 @@ const HeroSection = () => {
               >
                 Events Registration
               </motion.button>
-            </Link>
+            </Link> */}
             <Link
               href="https://linktr.ee/intelliasociety"
               target="_blank"
