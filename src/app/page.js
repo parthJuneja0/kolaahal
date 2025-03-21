@@ -23,18 +23,18 @@ export default function Home() {
     } else {
       document.body.style.overflow = "auto";
     }
-    
+
     // Simulate loading time
     const timer = setTimeout(() => {
       setLoading(false);
     }, 2000);
-    
+
     return () => {
       clearTimeout(timer);
       document.body.style.overflow = "auto";
     };
   }, [loading]);
-  
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       setParticles(
@@ -47,7 +47,7 @@ export default function Home() {
       );
     }
   }, []); // Runs only on client
-  
+
   // Detect when each section is in view (example for hero)
   const [heroInView, setHeroInView] = useState(false);
   useEffect(() => {
@@ -62,14 +62,14 @@ export default function Home() {
         },
         { threshold: 0.2 }
       );
-      
+
       const sections = document.querySelectorAll("section");
       sections.forEach((section) => observer.observe(section));
-      
+
       return () => sections.forEach((section) => observer.unobserve(section));
     }
   }, [loading]);
-  
+
   return (
     <>
       {/* Loading screen */}
@@ -99,7 +99,7 @@ export default function Home() {
               />
             ))}
           </div>
-          
+
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -118,7 +118,7 @@ export default function Home() {
           </div>
         </div>
       )}
-      
+
       {/* Hero reveal animation after loading finishes */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -128,10 +128,10 @@ export default function Home() {
       >
         <main className="relative">
           {/* Parallax Hero Section wrapper forced to black theme */}
-          <motion.div 
-            id="hero-section" 
-            style={{ 
-              opacity: heroOpacity, 
+          <motion.div
+            id="hero-section"
+            style={{
+              opacity: heroOpacity,
               y: heroY,
               backgroundColor: "#000"
             }}
@@ -139,20 +139,20 @@ export default function Home() {
           >
             <motion.div
               initial={{ opacity: 0, y: 50 }}
-              animate={{ 
+              animate={{
                 opacity: loading ? 0 : 1,
                 y: loading ? 50 : 0,
               }}
-              transition={{ 
-                duration: 0.8, 
+              transition={{
+                duration: 0.8,
                 delay: 0.3,
-                ease: "easeOut" 
+                ease: "easeOut"
               }}
             >
               <HeroSection />
             </motion.div>
           </motion.div>
-          
+
           {/* Throwback Section forced to black theme */}
           <motion.section
             style={{ backgroundColor: "#000" }}
@@ -163,7 +163,7 @@ export default function Home() {
           >
             <ThrowbackSection />
           </motion.section>
-          
+
           {/* Footer with subtle fade in */}
           <motion.div
             initial={{ opacity: 0 }}
