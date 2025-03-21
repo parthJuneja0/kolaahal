@@ -4,7 +4,6 @@ import { Uncial_Antiqua } from "next/font/google";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { userContext } from "@/context/userContext";
-
 const uncialAntiqua = Uncial_Antiqua({ subsets: ["latin"], weight: ["400"] });
 
 const HeroSection = () => {
@@ -38,8 +37,14 @@ const HeroSection = () => {
     }
   }, []);
 
+  // const [showToast, setShowToast] = useState(false);
+  // const handleRegisterClick = () => {
+  //   setShowToast(true);
+  //   setTimeout(() => setShowToast(false), 3000); // Hide after 3 seconds
+  // };
+
   return (
-    <div className="relative w-full min-h-screen overflow-hidden">
+    <div className="relative w-full min-h-screen overflow-hidden bg-black">
       {/* Top-left logos */}
       <div className="absolute top-4 left-4 z-50 flex space-x-4">
         <img
@@ -57,15 +62,31 @@ const HeroSection = () => {
       {/* Top-right Sign In */}
       <div className="absolute top-4 right-4 z-50 flex space-x-4">
         {!userData && (
-          <>
-            <Link href="/signin">
-              <button className="lg:px-6 lg:py-2 px-3 py-1 bg-amber-500 text-white rounded-full cursor-pointer hover:scale-105 transition-transform duration-300 hover:shadow-glow">
-                Sign In
-              </button>
-            </Link>
-          </>
+          <Link href="/signin">
+            <button className="lg:px-6 lg:py-2 px-3 py-1 bg-red-600 text-white rounded-full cursor-pointer hover:scale-105 transition-transform duration-300">
+              Sign In
+            </button>
+          </Link>
         )}
       </div>
+
+      {/* Uncomment below block to enable Toast Notification */}
+      {/*
+      {showToast && (
+        <div
+          id="toast-default"
+          className="fixed bottom-5 right-5 z-[100] flex items-center max-w-xs p-4 text-white bg-gray-900 rounded-lg shadow-lg animate-slide-in"
+          role="alert"
+        >
+          <div className="inline-flex items-center justify-center w-8 h-8 text-blue-500 bg-blue-100 rounded-lg">
+            <LuCircleAlert />
+          </div>
+          <div className="ml-3 text-sm font-medium">
+            Registration opening very soon...
+          </div>
+        </div>
+      )}
+      */}
 
       {/* Main content */}
       <div className="relative w-full h-screen">
@@ -83,8 +104,8 @@ const HeroSection = () => {
           <source src="/assets/bg.mp4" type="video/mp4" />
         </video>
 
-        {/* Overlay with content adjusted to amber theme */}
-        <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center px-4 bg-amber-100/50 text-black">
+        {/* Overlay with content */}
+        <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center text-white bg-black/50 px-4">
           <motion.div
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -116,7 +137,7 @@ const HeroSection = () => {
             </p>
           </motion.div>
 
-          {/* Buttons Container adjusted to amber theme */}
+          {/* Buttons Container */}
           <div className="mt-8 md:mt-12 flex flex-col sm:flex-row items-center gap-4">
             <Link href="/events">
               <motion.button
@@ -129,9 +150,9 @@ const HeroSection = () => {
                 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-6 sm:px-8 py-2 sm:py-3 bg-gradient-to-r from-amber-400 to-amber-500 rounded-full text-base sm:text-lg font-medium text-black hover:shadow-glow transition-all duration-300 cursor-pointer hover:scale-105"
+                className="px-6 sm:px-8 py-2 sm:py-3 bg-gradient-to-r from-red-600 to-pink-600 rounded-full text-base sm:text-lg font-medium hover:shadow-glow transition-all duration-300 cursor-pointer hover:scale-105"
               >
-                Events Registration
+              Events Register
               </motion.button>
             </Link>
             <Link
@@ -149,7 +170,8 @@ const HeroSection = () => {
                 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-6 sm:px-8 py-2 sm:py-3 bg-amber-200 rounded-full border border-amber-300 text-black cursor-pointer hover:scale-105 transition-all duration-300"
+                // onClick={handleRegisterClick}
+                className="px-6 sm:px-8 py-2 sm:py-3 bg-white/10 backdrop-blur text-white rounded-full border-red-300 border cursor-pointer hover:scale-105 transition-all duration-300"
               >
                 Register Now
               </motion.button>

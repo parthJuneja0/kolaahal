@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import HeroSection from "@/components/HeroSection";
@@ -74,7 +75,7 @@ export default function Home() {
     <>
       {/* Loading screen */}
       {loading && (
-        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-amber-100">
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black">
           {/* Animated particles for loading screen */}
           <div className="absolute inset-0 pointer-events-none">
             {particles.map((particle, i) => (
@@ -95,7 +96,7 @@ export default function Home() {
                   repeat: Infinity,
                   repeatType: "reverse",
                 }}
-                className="absolute w-2 h-2 rounded-full bg-amber-300"
+                className="absolute w-2 h-2 rounded-full bg-white"
               />
             ))}
           </div>
@@ -104,16 +105,16 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="text-6xl font-bold text-black z-10"
+            className="text-6xl font-bold text-white z-10"
           >
             Presenting
           </motion.div>
-          <div className="mt-8 w-64 h-2 bg-gray-300 rounded-full overflow-hidden z-10">
+          <div className="mt-8 w-64 h-2 bg-gray-800 rounded-full overflow-hidden z-10">
             <motion.div
               initial={{ width: "0%" }}
               animate={{ width: "100%" }}
               transition={{ duration: 1.8, ease: "easeInOut" }}
-              className="h-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600"
+              className="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-red-500"
             />
           </div>
         </div>

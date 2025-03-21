@@ -14,8 +14,8 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
 
 /* Force Permanent Black Theme */
 :root {
-  --background: #fee685  !important;  /* Black Background */
-  --foreground: #fee685  !important;  /* White Text */
+  --background: #000000 !important;  /* Black Background */
+  --foreground: #ffffff !important;  /* White Text */
 }
 
 /* Remove the prefers-color-scheme condition */

@@ -16,10 +16,14 @@ export default function Events() {
   const [animateCards, setAnimateCards] = useState(false);
 
   useEffect(() => {
+    // Reset animation state when tab changes
     setAnimateCards(false);
+
+    // Trigger animation after a short delay
     const timer = setTimeout(() => {
       setAnimateCards(true);
     }, 50);
+
     return () => clearTimeout(timer);
   }, [activeTab]);
 
@@ -31,51 +35,123 @@ export default function Events() {
   ];
 
   return (
-    <div className="min-h-screen bg-amber-100 text-white">
+    <div className="min-h-screen bg-black text-white">
       <Head>
         <title>Event Categories</title>
-        <meta name="description" content="Explore our exciting event categories" />
+        <meta
+          name="description"
+          content="Explore our exciting event categories"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="relative h-[32vh] md:h-[32vh] ">
-        <div className="absolute top-4 left-4 z-50 flex space-x-4">
-          <img src="/assets/miet.png" alt="Logo 1" className="logo h-6 sm:h-8 md:h-10 lg:h-12" />
-        </div>
+      {/* Hero Section */}
+      <div className="relative h-[40vh] md:h-[50vh]">
         <div className="absolute top-4 right-4 z-50 flex space-x-4">
-          <img src="/assets/28th.png" alt="Logo 2" className="logo h-6 sm:h-8 md:h-10 lg:h-14" />
-          <img src="/assets/image.png" alt="Logo 3" className="logo h-6 sm:h-8 md:h-10 lg:h-12" />
+          <img
+            src="/assets/miet.png"
+            alt="Logo 1"
+            className="logo lg:h-12 md:h-10 sm:h-8 h-6"
+          />
+          <img
+            src="/assets/image.png"
+            alt="Logo 2"
+            className="logo lg:h-12 md:h-10 sm:h-8 h-6"
+          />
         </div>
-        <div className="relative z-10  lg:h-[10rem]  md:h-[10rem]  h-[8rem] container mx-auto px-4 flex flex-col justify-center items-center text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mt-6 lg:-mt-4 md:-mt-4">
+        <div className="absolute inset-0 bg-gradient-to-r from-red-900/30 to-black z-0">
+          {/* Pattern overlay */}
+          <div
+            className="absolute inset-0 opacity-10"
+            style={{
+              backgroundImage:
+                'url("data:image/svg+xml,%3Csvg width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\' fill-rule=\'evenodd\'%3E%3Ccircle cx=\'3\' cy=\'3\' r=\'1\'/%3E%3Ccircle cx=\'13\' cy=\'13\' r=\'1\'/%3E%3C/g%3E%3C/svg%3E")',
+              backgroundSize: "15px 15px",
+            }}
+          ></div>
+        </div>
+
+        <div className="relative z-10 h-full container mx-auto px-4 flex flex-col justify-center">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold mb-4">
+            {/* Character-by-character reveal for CAMPUS */}
             <div className="inline-block">
-              {"CAMPUS".split(" ").map((char, index) => (
-                <span key={`campus-${index}`} className="text-gray-500   inline-block animate-char-reveal" style={{ animationDelay: `${index * 120}ms` }}>
+              {"CAMPUS".split("").map((char, index) => (
+                <span
+                  key={`campus-${index}`}
+                  className={`text-white ${uncialAntiqua.className} inline-block animate-char-reveal`}
+                  style={{ animationDelay: `${index * 120}ms` }}
+                >
                   {char}
                 </span>
               ))}
             </div>
+
+            {/* Character-by-character reveal for EVENTS */}
             <div className="inline-block ml-2">
-              {" EVENTS".split(" ").map((char, index) => (
-                <span key={`events-${index}`} className="text-red-600 inline-block animate-char-reveal" style={{ animationDelay: `${6 * 120 + index * 120}ms` }}>
+              {" EVENTS".split("").map((char, index) => (
+                <span
+                  key={`events-${index}`}
+                  className={`text-red-600 ${uncialAntiqua.className} inline-block animate-char-reveal`}
+                  style={{ animationDelay: `${6 * 120 + index * 120}ms` }}
+                >
                   {char}
                 </span>
               ))}
             </div>
           </h1>
+
+          {/* Gradient reveal for paragraph */}
+          <div className="overflow-hidden">
+            <p
+              className={`text-xl md:text-2xl text-transparent bg-clip-text bg-gradient-to-r from-gray-300 to-red-300 max-w-2xl animate-gradient-reveal ${nanumGothic.className}`}
+            >
+              Experience the best of technical, cultural, creativity and
+              management events at our campus festival.
+            </p>
+          </div>
         </div>
       </div>
 
-      <main className="container mx-auto px-4 sm:px-6 md:px-10 lg:px-32 py-10 relative">
-        <div className="mb-12 w-full max-w-5xl mx-auto px-4 -mt-32 sm:-mt-44">
-          <div className="relative p-3 md:p-6 rounded-xl overflow-hidden">
+      <main className="container mx-auto px-4 lg:px-32 py-10 relative">
+        {/* Decorative element */}
+        <div className="absolute top-0 right-0 w-32 h-32 md:w-48 md:h-48 bg-red-600 rounded-full opacity-10 blur-3xl -z-10"></div>
+        <div className="absolute bottom-0 left-0 w-40 h-40 md:w-64 md:h-64 bg-red-800 rounded-full opacity-10 blur-3xl -z-10"></div>
+
+        {/* Category Tabs */}
+        <div className="mb-12 w-full max-w-5xl mx-auto px-4">
+          <div className="relative bg-gradient-to-br from-gray-900/20 to-gray-950 p-3 md:p-6 rounded-xl overflow-hidden">
+            {/* Glass panel for buttons */}
             <div className="relative backdrop-blur-sm bg-gray-900/30 rounded-lg p-2 md:p-4 border border-gray-800/50">
-              <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
+              <div className="flex flex-wrap justify-center">
                 {categories.map((category) => (
-                  <button key={category.id} onClick={() => setActiveTab(category.id)} className={`group relative m-1 px-3 py-2 sm:px-5 md:px-8 md:py-3 text-sm md:text-base ${activeTab === category.id ? "text-white" : "text-gray-900 hover:text-white"}`}>
-                    {activeTab === category.id && <div className="absolute inset-0 bg-red-800/80 clip-hexagon"></div>}
+                  <button
+                    key={category.id}
+                    onClick={() => setActiveTab(category.id)}
+                    className={`
+                      group relative m-1 px-3 py-2 md:px-8 md:py-3 overflow-hidden
+                      text-sm md:text-base
+                      ${activeTab === category.id ? "text-white" : "text-gray-400 hover:text-white"}
+                    `}
+                  >
+                    {/* Hexagonal background for active state */}
+                    {activeTab === category.id && (
+                      <div className="absolute inset-0 bg-red-800/80 clip-hexagon"></div>
+                    )}
+
+                    {/* Hover effect - subtle glow */}
                     <div className="absolute inset-0 bg-red-700/0 clip-hexagon transition-all duration-300 group-hover:bg-red-700/20"></div>
-                    <span className="relative z-10 font-medium tracking-wide whitespace-nowrap">{category.name}</span>
+
+                    {/* Text content */}
+                    <span className="relative z-10 font-medium tracking-wide whitespace-nowrap">
+                      {category.name}
+                    </span>
+
+                    {/* Bottom accent line */}
+                    <div
+                      className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 h-0.5 bg-red-600 transition-all duration-300 ${
+                        activeTab === category.id ? "w-full" : "w-0 group-hover:w-2/3"
+                      }`}
+                    ></div>
                   </button>
                 ))}
               </div>
@@ -83,10 +159,7 @@ export default function Events() {
           </div>
         </div>
 
-<<<<<<< Updated upstream
-=======
         {/* Activity Cards */}
->>>>>>> Stashed changes
         <div className="grid grid-cols-3 px-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-12">
           {activities && activities[activeTab] && Object.values(activities[activeTab]).map((activity, index) => (
             <Link key={activity.title} href={`/events/${activeTab}/${activity.title}`} passHref>
@@ -105,6 +178,106 @@ export default function Events() {
           ))}
         </div>
       </main>
+
+      <footer className="mt-20 py-12 bg-gradient-to-t from-gray-900 to-black border-t border-red-900/20">
+        <div className="container mx-auto px-4 text-center">
+          <div className="text-red-600 font-bold text-xl mb-2">CAMPUS FEST</div>
+          <p className="text-gray-500">
+            © {new Date().getFullYear()} All rights reserved.
+          </p>
+        </div>
+      </footer>
+
+      {/* Custom global styles for logo responsiveness */}
+      <style jsx global>{`
+        @media (max-width: 667px) {
+          .logo {
+            height: 1.25rem !important;
+          }
+        }
+        .clip-hexagon {
+          clip-path: polygon(
+            10% 0%,
+            90% 0%,
+            100% 50%,
+            90% 100%,
+            10% 100%,
+            0% 50%
+          );
+        }
+
+        @media (max-width: 640px) {
+          .clip-hexagon {
+            clip-path: polygon(
+              5% 0%,
+              95% 0%,
+              100% 50%,
+              95% 100%,
+              5% 100%,
+              0% 50%
+            );
+          }
+        }
+
+        @keyframes gradient {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+
+        .animate-gradient {
+          background-size: 200% 200%;
+          animation: gradient 3s ease infinite;
+        }
+        @keyframes charReveal {
+          0% {
+            opacity: 0;
+            transform: translateY(50px) rotate(20deg) scale(0);
+            filter: blur(10px);
+          }
+          80% {
+            opacity: 1;
+            transform: translateY(0) rotate(0) scale(1.1);
+            filter: blur(0);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        .animate-char-reveal {
+          opacity: 0;
+          animation: charReveal 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+            forwards;
+        }
+
+        /* Gradient reveal animation */
+        @keyframes gradientReveal {
+          0% {
+            opacity: 0;
+            transform: translateY(20px);
+            background-position: 0% 50%;
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+            background-position: 100% 50%;
+          }
+        }
+
+        .animate-gradient-reveal {
+          background-size: 200% 200%;
+          opacity: 0;
+          animation: gradientReveal 1.5s 1.5s forwards;
+        }
+      `}</style>
     </div>
   );
 }
