@@ -28,10 +28,14 @@ export default function EventDetail() {
     setIsLoaded(true);
   }, []);
 
-  const handleClick = () => {
-    if (!userData) {
-      router.push("/signin");
-    }
+  const googleForms = {
+    Rangmanch: "https://forms.gle/e55MWpN31KXZatCD9",
+    "Swar Sangam": "https://forms.gle/Secpvz2AWGv4Q5CX6",
+    Foxtrot: "https://forms.gle/DrBfx4zZNMQbahVE9",
+    "Battle of Bands":
+      "https://docs.google.com/forms/d/e/1FAIpQLScJwsvsBU3hEBTZAMR6EavJbslVexEM69oOcFrUNzjUFk7hrw/viewform?usp=header",
+    Artmania:
+      "https://docs.google.com/forms/d/e/1FAIpQLSfUFlgT-sPAhd7iJ47b-81C-IvJV2XhNY1E4fKpNGTUBtNZhw/viewform",
   };
 
   const { activities } = useContext(eventsDataContext);
@@ -178,46 +182,27 @@ export default function EventDetail() {
                 </p>
               </div>
             </div>
-            {activity.title === "Foxtrot Solo - Day 1" ||
-            activity.title === "Foxtrot Duet - Day 2" ||
-            activity.title === "Foxtrot Group - Day 2" ||
-            activity.title === "Swar Sangam Solo" ||
-            activity.title === "Swar Sangam Duet" ||
-            activity.title === "Swar Sangam Group" ||
-            activity.title === "Xtacy - The Fashion Show" ||
-            activity.title === "Rangmanch - Skit and Nukkad Natak" ? (
-              <div className="text-sm text-red-500">
-                Auditions are currently underway.
-              </div>
-            ) : (
-              <Link
-                href={
-                  !userData
-                    ? `/signin`
-                    : `/events/${category}/${title}/register`
-                }
-                passHref
-              >
+            {googleForms[activity.title] ? (
+              <Link href={googleForms[activity.title]} passHref>
                 <button
                   onClick={() => {
                     handleClick();
                   }}
-                  disabled={userData?.activityCount >= 3}
-                  className={`group w-full ${
-                    !userData || userData?.activityCount >= 3
-                      ? "bg-gray-700 cursor-not-allowed hover:bg-gray-600"
-                      : "bg-red-600 hover:bg-red-700"
-                  } text-white font-bold py-4 px-8 rounded-lg mt-8 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-red-900/30 relative overflow-hidden cursor-pointer`}
+                  className={`group w-full 
+                       "bg-red-600 hover:bg-red-700" bg-red-500
+                   text-white font-bold py-4 px-8 rounded-lg mt-8 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-red-900/30 relative overflow-hidden cursor-pointer`}
                 >
-                  <span className="relative z-10">
-                    {!userData
-                      ? "Sign In to Register"
-                      : userData?.activityCount >= 3
-                      ? "Limit Reached"
-                      : "Register Now"}
-                  </span>
+                  <span className="relative z-10">Register Now</span>
                 </button>
               </Link>
+            ) : (
+              <button
+                className={`group w-full 
+                       "bg-red-600 hover:bg-red-700" bg-gray-500
+                   text-white font-bold py-4 px-8 rounded-lg mt-8 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-red-900/30 relative overflow-hidden cursor-not-allowed`}
+              >
+                <span className="relative z-10">Registration Closed</span>
+              </button>
             )}
           </div>
         </div>

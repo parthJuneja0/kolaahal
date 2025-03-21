@@ -54,11 +54,7 @@ export default function Footer() {
               animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 10 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-center text-gray-700"
-            >
-              <a href="tel:9084774537" className="text-base">
-                For enquiry: 📞 +91 90847 74537
-              </a>
-            </motion.div>
+            ></motion.div>
           </div>
 
           {/* Right Column: Social Icons */}

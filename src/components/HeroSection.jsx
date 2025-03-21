@@ -41,7 +41,7 @@ const HeroSection = () => {
   return (
     <div className="relative w-full min-h-screen overflow-hidden">
       {/* Top-left logos */}
-      <div className="absolute top-4 left-4 z-50 flex space-x-4">
+      <div className="absolute top-4 z-50 flex justify-between space-x-4 w-full px-6">
         <img
           src="/assets/miet.png"
           alt="Logo 1"
@@ -55,7 +55,7 @@ const HeroSection = () => {
       </div>
 
       {/* Top-right Sign In */}
-      <div className="absolute top-4 right-4 z-50 flex space-x-4">
+      {/* <div className="absolute top-4 right-4 z-50 flex space-x-4">
         {!userData && (
           <>
             <Link href="/signin">
@@ -65,7 +65,7 @@ const HeroSection = () => {
             </Link>
           </>
         )}
-      </div>
+      </div> */}
 
       {/* Main content */}
       <div className="relative w-full h-screen">
@@ -118,7 +118,7 @@ const HeroSection = () => {
 
           {/* Buttons Container adjusted to amber theme */}
           <div className="mt-8 md:mt-12 flex flex-col sm:flex-row items-center gap-4">
-            {/* <Link href="/events">
+            <Link href="/events">
               <motion.button
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
@@ -133,7 +133,7 @@ const HeroSection = () => {
               >
                 Events Registration
               </motion.button>
-            </Link> */}
+            </Link>
             <Link
               href="https://linktr.ee/intelliasociety"
               target="_blank"

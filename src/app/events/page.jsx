@@ -12,7 +12,7 @@ const nanumGothic = Nanum_Gothic({ subsets: ["latin"], weight: ["400"] });
 export default function Events() {
   const { activities } = useContext(eventsDataContext);
 
-  const [activeTab, setActiveTab] = useState("technical");
+  const [activeTab, setActiveTab] = useState("cultural");
   const [animateCards, setAnimateCards] = useState(false);
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export default function Events() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="relative h-[32vh] md:h-[32vh] ">
+      <div className="relative h-28">
         <div className="absolute top-4 left-4 z-50 flex space-x-4">
           <img
             src="/assets/miet.png"
@@ -64,7 +64,7 @@ export default function Events() {
         <div className="relative z-10  lg:h-[10rem]  md:h-[10rem]  h-[8rem] container mx-auto px-4 flex flex-col justify-center items-center text-center">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mt-6 lg:-mt-4 md:-mt-4">
             <div className="inline-block">
-              {"CAMPUS".split(" ").map((char, index) => (
+              {"CULTURAL".split(" ").map((char, index) => (
                 <span
                   key={`campus-${index}`}
                   className="text-gray-500   inline-block animate-char-reveal"
@@ -90,36 +90,8 @@ export default function Events() {
       </div>
 
       <main className="container mx-auto px-4 sm:px-6 md:px-10 lg:px-32 py-10 relative">
-        <div className="mb-12 w-full max-w-5xl mx-auto px-4 -mt-32 sm:-mt-44">
-          <div className="relative p-3 md:p-6 rounded-xl overflow-hidden">
-            <div className="relative backdrop-blur-sm bg-gray-900/30 rounded-lg p-2 md:p-4 border border-gray-800/50">
-              <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
-                {categories.map((category) => (
-                  <button
-                    key={category.id}
-                    onClick={() => setActiveTab(category.id)}
-                    className={`group relative m-1 px-3 py-2 sm:px-5 md:px-8 md:py-3 text-sm md:text-base ${
-                      activeTab === category.id
-                        ? "text-white"
-                        : "text-gray-900 hover:text-white"
-                    }`}
-                  >
-                    {activeTab === category.id && (
-                      <div className="absolute inset-0 bg-red-800/80 clip-hexagon"></div>
-                    )}
-                    <div className="absolute inset-0 bg-red-700/0 clip-hexagon transition-all duration-300 group-hover:bg-red-700/20"></div>
-                    <span className="relative z-10 font-medium tracking-wide whitespace-nowrap">
-                      {category.name}
-                    </span>
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* Activity Cards */}
-        <div className="grid grid-cols-3 px-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-12">
+        <div className="flex flex-wrap justify-center gap-4 sm:gap-6 md:space-x-32 space-y-8 lg:mt-8">
           {activities &&
             activities[activeTab] &&
             Object.values(activities[activeTab]).map((activity, index) => (
@@ -150,7 +122,7 @@ export default function Events() {
                       {activity.title}
                     </h3>
                     <div className="mt-2 sm:mt-4 flex justify-center">
-                      <span className="inline-flex items-center text-yellow-400 text-xs sm:text-sm font-medium group-hover:translate-x-1 transition-transform duration-300">
+                      <span className="inline-flex items-center text-gray-600 text-xs sm:text-sm font-medium group-hover:translate-x-1 transition-transform duration-300">
                         Details
                       </span>
                     </div>
