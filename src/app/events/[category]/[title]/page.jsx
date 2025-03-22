@@ -29,10 +29,10 @@ export default function EventDetail() {
   }, []);
 
   const googleForms = {
-    Rangmanch: "https://forms.gle/e55MWpN31KXZatCD9",
-    "Swar Sangam": "https://forms.gle/Secpvz2AWGv4Q5CX6",
-    Foxtrot: "https://forms.gle/DrBfx4zZNMQbahVE9",
-    "Battle of Bands":
+    "Rangmanch - Day 3": "https://forms.gle/e55MWpN31KXZatCD9",
+    "Swar Sangam - Day 1": "https://forms.gle/Secpvz2AWGv4Q5CX6",
+    "Foxtrot - Day 1, Day 2": "https://forms.gle/DrBfx4zZNMQbahVE9",
+    "Battle of Bands - Day 2":
       "https://docs.google.com/forms/d/e/1FAIpQLScJwsvsBU3hEBTZAMR6EavJbslVexEM69oOcFrUNzjUFk7hrw/viewform?usp=header",
     Artmania:
       "https://docs.google.com/forms/d/e/1FAIpQLSfUFlgT-sPAhd7iJ47b-81C-IvJV2XhNY1E4fKpNGTUBtNZhw/viewform",
