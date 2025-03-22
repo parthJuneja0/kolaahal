@@ -3,6 +3,7 @@ import { useParams, useRouter } from "next/navigation";
 import Head from "next/head";
 import Link from "next/link";
 import { useState, useEffect, useContext } from "react";
+import { motion } from "framer-motion";
 import {
   ArrowLeft,
   Calendar,
@@ -14,7 +15,6 @@ import {
 import { eventsDataContext } from "@/context/eventsDataContext";
 import Image from "next/image";
 import { AiOutlineTeam } from "react-icons/ai";
-import { LuCircleAlert } from "react-icons/lu";
 import { userContext } from "@/context/userContext";
 
 export default function EventDetail() {
@@ -51,23 +51,20 @@ export default function EventDetail() {
     )
   ) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
-        <div
-          className={`text-center transform transition-all duration-700 ${
-            isLoaded ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-          }`}
-        >
-          <h2 className="text-red-500 text-3xl font-bold mb-4">
-            Event Not Found
-          </h2>
-          <p className="text-gray-300 mb-8">
-            The event you're looking for doesn't exist or has been removed.
-          </p>
-          <Link href="/events" passHref>
-            <button className="bg-red-600 hover:bg-red-700 text-white py-3 px-8 rounded-full transition-all duration-300 flex items-center mx-auto hover:shadow-lg hover:shadow-red-900/20">
-              <ArrowLeft className="mr-2 h-5 w-5" /> Back to Events
-            </button>
-          </Link>
+      <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-amber-100">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="text-6xl font-bold text-black z-10"
+        ></motion.div>
+        <div className="mt-8 w-64 h-2 bg-gray-300 rounded-full overflow-hidden z-10">
+          <motion.div
+            initial={{ width: "0%" }}
+            animate={{ width: "100%" }}
+            transition={{ duration: 1.8, ease: "easeInOut" }}
+            className="h-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600"
+          />
         </div>
       </div>
     );
