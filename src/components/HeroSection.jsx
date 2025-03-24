@@ -42,16 +42,25 @@ const HeroSection = () => {
     <div className="relative w-full min-h-screen overflow-hidden">
       {/* Top-left logos */}
       <div className="absolute top-4 z-50 flex justify-between space-x-4 w-full px-6">
-        <img
-          src="/assets/miet.png"
-          alt="Logo 1"
-          className="lg:h-12 md:h-10 sm:h-8 h-6"
-        />
-        <img
-          src="/assets/image.png"
-          alt="Logo 2"
-          className="lg:h-12 md:h-10 sm:h-8 h-6"
-        />
+        <div className="flex">
+          <img
+            src="/assets/miet.png"
+            alt="Logo 1"
+            className="lg:h-12 md:h-10 sm:h-8 h-6 mr-3"
+          />
+          <img
+            src="/assets/image.png"
+            alt="Logo 2"
+            className="lg:h-12 md:h-10 sm:h-8 h-6"
+          />
+        </div>
+        <Link
+          href="/apk/app.apk" // Change this to your hosted APK link
+          download="my-app.apk"
+          className=" px-4 py-2 lg:px-8 lg:py-3 bg-gradient-to-r from-amber-400 to-amber-500 rounded-full text-base sm:text-lg font-medium text-black hover:shadow-glow transition-all duration-300 cursor-pointer hover:scale-105"
+        >
+          Download APK
+        </Link>
       </div>
 
       {/* Top-right Sign In */}
@@ -138,8 +147,7 @@ const HeroSection = () => {
               href="https://linktr.ee/intelliasociety"
               target="_blank"
               rel="noopener noreferrer"
-            >
-            </Link>
+            ></Link>
           </div>
         </div>
 
